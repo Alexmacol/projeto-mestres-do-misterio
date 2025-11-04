@@ -1,0 +1,34 @@
+/* Responsividade em telas menores */ 
+@media (max-width: 768px) {
+  body {
+    padding: 5px;
+  }
+  .container {
+    padding: 0 10px;
+  }
+  .main-title {
+    font-size: 2.5em;
+  }
+  .intro-box {
+    width: 85%;
+    padding: 20px;
+  }
+  .input-group {
+    flex-direction: column;
+  }
+  #subgenre-select {
+    width: 100%;
+  }
+  .search-btn {
+    width: 100%;
+  }
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+  .card {
+    padding: 20px;
+  }
+  .card-details p, .card-details li {
+    font-size: 1.3em;
+  }
+}

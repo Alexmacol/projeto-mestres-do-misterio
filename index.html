@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <title>Mestres do Mistério</title>
+    
+    <!-- Google Fonts -->
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com" />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap"
+      rel="stylesheet" />
+
+    <link
+      rel="stylesheet"
+      href="./src/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="./src/css/responsive.css" />
+
+    <!-- Font-awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  </head>
+  <body>
+    <section
+      id="intro-section"
+      class="container hero-section">
+      <!-- Background -->
+      <div class="hero-bg"></div>
+      <div class="overlay-dark"></div>
+      <div class="hero-content">
+        <h1 class="main-title">Mestres do Mistério</h1>
+        <div class="intro-box">
+          <p>
+            Explore o fascinante universo da
+            <span class="highlight">literatura de mistério e suspense</span>,
+            onde cada página revela segredos, enigmas e reviravoltas
+            inesperadas.
+          </p>
+          <p>
+            Dos clássicos detetives vitorianos aos modernos thrillers
+            psicológicos, descubra os
+            <span class="highlight-red">maiores escritores</span> que definiram
+            e revolucionaram cada subgênero desta arte literária envolvente.
+          </p>
+        </div>
+        <p class="call-to-action-text">
+          Selecione um subgênero abaixo para conhecer seus mestres
+        </p>
+        <div class="dots"><span></span><span></span><span></span></div>
+      </div>
+    </section>
+
+    <!-- Seção de Seleção de Subgênero -->
+    <section
+      id="search-controls"
+      class="container">
+      <div class="control-box">
+        <h2>Escolha um Subgênero</h2>
+        <div class="input-group">
+          <label
+            for="subgenre-select"
+            class="hidden"
+            >Escolha um subgênero de mistério</label
+          >
+          <select
+            id="subgenre-select"
+            aria-label="Escolha um subgênero de mistério"
+            required>
+            <option value="">Selecione um subgênero...</option>
+            <option value="classico">Mistério Clássico</option>
+            <option value="brasileiro">Policial Brasileiro</option>
+            <option value="nordico">Policial Nórdico</option>
+            <option value="sulamericano">Policial Sul-Americano</option>
+            <option value="procedimento policial">Procedimento Policial</option>
+            <option value="cozy">Cozy Mystery</option>
+            <option value="espionagem">Espionagem</option>
+            <option value="forense">Forense</option>
+            <option value="noir">Policial Noir (hard-boiled)</option>
+            <option value="conspiracao">Thriller de Conspiração</option>
+            <option value="historico">Thriller Histórico</option>
+            <option value="honkaku">Mistério Ortodoxo (Honkaku)</option>
+            <option value="psicologico">Thriller Psicológico</option>
+            <option value="techno">Techno-Thriller</option>
+          </select>
+          <button
+            type="button"
+            id="search-button"
+            class="search-btn"
+            disabled>
+            <i class="fas fa-search"></i> Buscar Escritores
+          </button>
+        </div>
+      </div>
+
+      <!-- Mensagem de estado inicial -->
+      <div
+        id="initial-message"
+        class="state-message">
+        <p>
+          Selecione um subgênero e clique em "Buscar Escritores" para investigar
+        </p>
+      </div>
+    </section>
+
+    <!-- Seção de Resultados -->
+    <section
+      id="results-section"
+      class="container hidden">
+      <h1>Grandes Mestres do Gênero</h1>
+
+      <!-- Grid dos Escritores-->
+      <div class="card-grid">
+        <!-- * Cartões dos escritores serão inseridos aqui via JavaScript -->
+      </div>
+    </section>
+
+    <script src="./src/js/utils.js"></script>
+    <script src="./src/js/script.js"></script>
+  </body>
+</html>
