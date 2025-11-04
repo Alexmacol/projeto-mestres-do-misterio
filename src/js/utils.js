@@ -5,7 +5,7 @@
  */
 async function getAuthorsFromGemini(subgenre) {
   try {
-    const response = await fetch(`http://localhost:3000/api/get-authors?subgenre=${subgenre}`);
+    const response = await fetch(`/api/get-authors?subgenre=${subgenre}`);
     if (!response.ok) {
       throw new Error(`Erro na requisição: ${response.statusText}`);
     }
