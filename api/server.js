@@ -24,10 +24,14 @@ app.get("/api/get-authors", async (req, res) => {
     return res.status(400).json({ error: "O subgênero é obrigatório." });
   }
 
-  try {
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-pro" });
+  const MAX_RETRIES = 3;
+  const RETRY_DELAY = 2000; // 2 segundos
 
-    const prompt = `
+  for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+    try {
+      const model = genAI.getGenerativeModel({ model: "gemini-2.5-pro" });
+
+      const prompt = `
       Forneça uma lista de 15 autores proeminentes para o subgênero de mistério "${subgenre}".
       Retorne a resposta como um objeto JSON. Cada autor deve ter os seguintes campos:
       - "name": (String) O nome do autor.
@@ -51,17 +55,29 @@ app.get("/api/get-authors", async (req, res) => {
       ]
     `;
 
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    const text = await response.text();
+      const result = await model.generateContent(prompt);
+      const response = await result.response;
+      const text = await response.text();
 
-    // Limpa a resposta para garantir que seja um JSON válido
-    const jsonResponse = JSON.parse(text.replace(/```json|```/g, "").trim());
+      // Limpa a resposta para garantir que seja um JSON válido
+      const jsonResponse = JSON.parse(text.replace(/```json|```/g, "").trim());
 
-    res.json(jsonResponse);
-  } catch (error) {
-    console.error("Erro ao chamar a API do Gemini:", error);
-    res.status(500).json({ error: "Falha ao obter os dados dos autores." });
+      // Sucesso, retorna a resposta e sai da função
+      return res.json(jsonResponse);
+    } catch (error) {
+      console.error(`Tentativa ${attempt} de ${MAX_RETRIES} falhou:`, error);
+      if (attempt === MAX_RETRIES) {
+        // Se for a última tentativa, retorna o erro
+        return res
+          .status(500)
+          .json({
+            error:
+              "Falha ao obter os dados dos autores após múltiplas tentativas.",
+          });
+      }
+      // Espera antes da próxima tentativa
+      await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY));
+    }
   }
 });
 
