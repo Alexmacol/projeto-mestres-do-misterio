@@ -3,6 +3,20 @@ const cors = require("cors"); // Importa o pacote cors
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 require("dotenv").config(); // Carrega as variáveis de ambiente do arquivo .env
 
+// A chave de API carregada a partir das variáveis de ambiente
+const API_KEY = process.env.GEMINI_API_KEY;
+
+// Verificação de segurança: Garante que a API Key foi carregada antes de iniciar.
+if (!API_KEY) {
+  console.error(
+    "ERRO FATAL: A variável de ambiente GEMINI_API_KEY não foi encontrada."
+  );
+  console.error(
+    "Certifique-se de que você criou um arquivo .env com a sua chave."
+  );
+  process.exit(1); // Encerra o processo com um código de erro.
+}
+
 const app = express();
 const port = 3000;
 
@@ -12,8 +26,6 @@ app.use(cors());
 
 app.use(express.json());
 
-// A chave de API carregada a partir das variáveis de ambiente
-const API_KEY = process.env.GEMINI_API_KEY;
 const genAI = new GoogleGenerativeAI(API_KEY);
 
 // Endpoint para obter autores do Gemini
@@ -29,7 +41,9 @@ app.get("/api/get-authors", async (req, res) => {
 
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     try {
-      const model = genAI.getGenerativeModel({ model: "gemini-2.5-pro" });
+      const model = genAI.getGenerativeModel({
+        model: "gemini-1.5-pro-latest",
+      });
 
       const prompt = `
       Forneça uma lista de 15 autores proeminentes para o subgênero de mistério "${subgenre}".
@@ -68,12 +82,10 @@ app.get("/api/get-authors", async (req, res) => {
       console.error(`Tentativa ${attempt} de ${MAX_RETRIES} falhou:`, error);
       if (attempt === MAX_RETRIES) {
         // Se for a última tentativa, retorna o erro
-        return res
-          .status(500)
-          .json({
-            error:
-              "Falha ao obter os dados dos autores após múltiplas tentativas.",
-          });
+        return res.status(500).json({
+          error:
+            "Falha ao obter os dados dos autores após múltiplas tentativas.",
+        });
       }
       // Espera antes da próxima tentativa
       await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY));
