@@ -7,12 +7,16 @@ async function getAuthorsFromGemini(subgenre) {
   try {
     const response = await fetch(`/api/get-authors?subgenre=${subgenre}`);
     if (!response.ok) {
-      throw new Error(`Erro na requisição: ${response.statusText}`);
+      // Tenta ler a mensagem de erro do backend para fornecer mais detalhes.
+      const errorData = await response.json();
+      throw new Error(
+        errorData.error || `Erro na requisição: ${response.statusText}`
+      );
     }
     const authors = await response.json();
     return authors;
   } catch (error) {
-    console.error('Falha ao buscar autores:', error);
+    console.error("Falha ao buscar autores:", error);
     throw error;
   }
 }
@@ -82,7 +86,8 @@ function resultsGrid(authors) {
       } else {
         targetDetails.classList.add("expanded");
         button.classList.add("expanded");
-        button.innerHTML = 'Ocultar detalhes <i class="fas fa-chevron-down"></i>';
+        button.innerHTML =
+          'Ocultar detalhes <i class="fas fa-chevron-down"></i>';
       }
     });
   });

@@ -46,10 +46,13 @@ document.addEventListener("DOMContentLoaded", () => {
         resultsSection.classList.add("hidden");
         initialMessage.classList.remove("hidden");
         initialMessage.innerHTML = `
-          <p class="error-message">
-            <i class="fas fa-exclamation-triangle"></i> 
-            Ocorreu um erro ao buscar os dados. Tente novamente em instantes.
-          </p>
+        <p class="error-message">
+          <i class="fas fa-exclamation-triangle"></i> 
+          ${
+            error.message ||
+            "Ocorreu um erro ao buscar os dados. Tente novamente em instantes."
+          }
+        </p>
         `;
       } finally {
         searchButton.disabled = true;
