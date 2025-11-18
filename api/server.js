@@ -51,7 +51,7 @@ app.get("/api/get-authors", async (req, res) => {
         model: "gemini-1.5-pro-latest",
         // Habilita o modo de saída JSON
         generationConfig: {
-          responseMimeType: "application/json",
+          response_mime_type: "application/json",
         },
       });
 
@@ -59,16 +59,16 @@ app.get("/api/get-authors", async (req, res) => {
       Forneça uma lista de 15 autores proeminentes para o subgênero de mistério "${subgenre}".
       Retorne a resposta como um objeto JSON. Cada autor deve ter os seguintes campos:
       - "name": (String) O nome do autor.
-      - "dates": (String) As datas de nascimento e morte (ou "em atividade").
-      - "description": (String) Uma breve descrição (2 frases) do estilo e contribuições do autor para o gênero. Frases curtas e objetivas.
-      - "works": (Array de Strings) Uma lista de 3 obras notáveis. Se as obrar foram lançadas no Brasil, use os títulos em português; caso contrário, use os títulos originais.
-      Certifique-se de que a resposta seja um JSON válido sem texto adicional.
+      - "dates": (String) As datas de nascimento e morte (ex: "1890-1976") ou "em atividade".
+      - "description": (String) Uma breve descrição (2 frases) do estilo e contribuições do autor para o gênero.
+      - "works": (Array de Strings) Uma lista de 3 obras notáveis. Se as obras foram lançadas no Brasil, use os títulos em português; caso contrário, use os títulos originais.
+      
       Não invente autores; use apenas autores reais e verificados.
       Não invente obras; use apenas obras reais e verificadas.
       Não invente datas; use apenas datas reais e verificadas.
       Não invente descrições; use apenas descrições reais e verificadas.
 
-      O JSON deve ser uma lista de objetos, assim:
+      O formato da resposta deve ser uma lista de objetos JSON, como neste exemplo:
       [
         {
           "name": "Nome do Autor",
