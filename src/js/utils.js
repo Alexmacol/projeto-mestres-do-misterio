@@ -49,6 +49,9 @@ function resultsGrid(authors) {
 
     const card = document.createElement("div");
     card.className = "card";
+    // Adiciona um atraso de animação para criar um efeito de cascata
+    // Cada card começará a animar 50ms depois do anterior
+    card.style.animationDelay = `${index * 50}ms`;
     card.innerHTML = `
       <h3>${author.name}</h3>
       <span class="dates">${author.dates}</span>

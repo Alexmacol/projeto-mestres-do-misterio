@@ -251,11 +251,23 @@ body {
   gap: 5px;
   border: 1px solid transparent;
   transition: border-color 0.3s ease;
+  /* Animação de entrada */
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInSlideUp 0.5s ease-out forwards;
 }
 
 .card:hover,
 .card:focus-within {
   border-color: var(--color-accent-red);
+}
+
+/* Animação Keyframes */
+@keyframes fadeInSlideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .card h3 {
