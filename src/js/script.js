@@ -53,9 +53,11 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
       } finally {
         searchButton.disabled = true;
+        searchButton.disabled = false;
         searchButton.innerHTML =
           '<i class="fas fa-search"></i> Buscar Escritores';
         select.value = "";
+        // searchButton.disabled = true; // O botão deve ser reativado após a busca
       }
     }
   });
