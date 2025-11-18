@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors"); // Importa o pacote cors
+const path = require("path"); // Importa o módulo 'path' do Node.js
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 require("dotenv").config(); // Carrega as variáveis de ambiente do arquivo .env
 
@@ -25,6 +26,11 @@ const port = 3000;
 app.use(cors());
 
 app.use(express.json());
+
+// --- Servir Arquivos Estáticos (Frontend) ---
+// Configura o Express para servir os arquivos da pasta raiz do projeto
+// Isso permite que o index.html, CSS e JS sejam acessados pelo navegador.
+app.use(express.static(path.join(__dirname, "..")));
 
 const genAI = new GoogleGenerativeAI(API_KEY);
 
