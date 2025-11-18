@@ -55,12 +55,13 @@ document.addEventListener("DOMContentLoaded", () => {
         </p>
         `;
       } finally {
+        // Reseta o estado da interface para uma nova busca.
+        // O botão é desabilitado e o texto restaurado.
         searchButton.disabled = true;
-        searchButton.disabled = false;
         searchButton.innerHTML =
           '<i class="fas fa-search"></i> Buscar Escritores';
+        // Limpa a seleção, forçando o usuário a escolher um novo subgênero para habilitar o botão.
         select.value = "";
-        // searchButton.disabled = true; // O botão deve ser reativado após a busca
       }
     }
   });
