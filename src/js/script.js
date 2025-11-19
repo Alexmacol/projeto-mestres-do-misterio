@@ -4,6 +4,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const resultsSection = document.getElementById("results-section");
   const initialMessage = document.getElementById("initial-message");
 
+  // Popula o select com os dados do JSON
+  populateSelectWithOptions("subgenre-select", "data.json");
+
   // Controlador para cancelar requisições fetch em andamento
   let abortController = null;
 

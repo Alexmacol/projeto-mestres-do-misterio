@@ -107,3 +107,41 @@ function resultsGrid(authors) {
     }
   });
 }
+
+/**
+ * Popula um elemento select com opções de um arquivo JSON.
+ * @param {string} selectId - O ID do elemento select.
+ * @param {string} jsonUrl - A URL do arquivo JSON.
+ */
+async function populateSelectWithOptions(selectId, jsonUrl) {
+  const select = document.getElementById(selectId);
+  if (!select) {
+    console.error(`Elemento select com id "${selectId}" não encontrado.`);
+    return;
+  }
+
+  try {
+    const response = await fetch(jsonUrl);
+    if (!response.ok) {
+      throw new Error(`Erro ao carregar o JSON: ${response.statusText}`);
+    }
+    const data = await response.json();
+
+    // Adiciona a opção de placeholder manualmente, caso não exista
+    if (!select.querySelector('option[value=""]')) {
+      const placeholderOption = document.createElement('option');
+      placeholderOption.value = "";
+      placeholderOption.textContent = "Selecione um subgênero...";
+      select.appendChild(placeholderOption);
+    }
+
+    data.forEach(item => {
+      const option = document.createElement('option');
+      option.value = item.id;
+      option.textContent = item.name;
+      select.appendChild(option);
+    });
+  } catch (error) {
+    console.error('Erro ao popular o select:', error);
+  }
+}
