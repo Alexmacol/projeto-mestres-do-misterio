@@ -270,16 +270,13 @@ body {
 }
 
 .card-header {
-  /* display: flex; REMOVED to stack elements vertically */
-  /* justify-content: space-between; REMOVED */
-  /* align-items: flex-start; REMOVED */
-  gap: 15px; /* Keep gap if needed for vertical spacing, or adjust */
+  gap: 15px;
   margin-bottom: 15px;
-  text-align: left; /* Added to ensure left alignment of inline-block children */
+  text-align: left; 
 }
 
 .card h3 {
-  margin: 0 0 5px 0; /* Adjusted margin to add space below h3 */
+  margin: 0 0 5px 0; 
   font-size: 1.5em;
   line-height: 1.2;
   text-align: left;
@@ -294,8 +291,7 @@ body {
   font-weight: bold;
   text-align: left;
   white-space: nowrap;
-  /* flex-shrink: 0; */ /* Removed as not needed with inline-block */
-  display: inline-block; /* Changed to inline-block to restrict background to content width */
+  display: inline-block; 
 }
 
 .card-details p {
@@ -341,7 +337,7 @@ body {
   color: var(--color-accent-gold);
   cursor: pointer;
   font-weight: bold;
-  padding: 10px 0; /* Changed to apply 10px top/bottom padding for vertical centering */
+  padding: 10px 0; 
   margin-top: auto;
   text-align: center;
   transition: color 0.2s, background-color 0.2s;
