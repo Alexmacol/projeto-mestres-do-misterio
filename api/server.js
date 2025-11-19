@@ -48,7 +48,7 @@ app.get("/api/get-authors", async (req, res) => {
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     try {
       const model = genAI.getGenerativeModel({
-        model: "gemini-pro",
+        model: "gemini-pro-latest",
       });
 
       const prompt = `

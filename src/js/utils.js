@@ -89,7 +89,7 @@ function resultsGrid(authors) {
     const targetId = button.getAttribute("data-target");
     const targetDetails = document.getElementById(targetId);
 
-    // Encontra o card pai do botão
+11    // Encontra o card pai do botão
     const parentCard = button.closest(".card");
 
     if (!targetDetails || !parentCard) return;
