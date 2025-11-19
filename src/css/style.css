@@ -275,6 +275,7 @@ body {
   /* align-items: flex-start; REMOVED */
   gap: 15px; /* Keep gap if needed for vertical spacing, or adjust */
   margin-bottom: 15px;
+  text-align: left; /* Added to ensure left alignment of inline-block children */
 }
 
 .card h3 {
@@ -293,8 +294,8 @@ body {
   font-weight: bold;
   text-align: left;
   white-space: nowrap;
-  flex-shrink: 0;
-  display: block; /* Added to ensure it takes its own line and respects text-align: left */
+  /* flex-shrink: 0; */ /* Removed as not needed with inline-block */
+  display: inline-block; /* Changed to inline-block to restrict background to content width */
 }
 
 .card-details p {
@@ -340,7 +341,7 @@ body {
   color: var(--color-accent-gold);
   cursor: pointer;
   font-weight: bold;
-  padding: 10px 0 0 0;
+  padding: 10px 0; /* Changed to apply 10px top/bottom padding for vertical centering */
   margin-top: auto;
   text-align: center;
   transition: color 0.2s, background-color 0.2s;

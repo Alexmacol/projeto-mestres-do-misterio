@@ -38,6 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
       abortController = new AbortController();
 
       searchButton.disabled = true;
+      select.disabled = true; // Desabilita o select
       searchButton.innerHTML =
         '<i class="fas fa-spinner fa-spin"></i> Investigando...';
 
@@ -80,8 +81,8 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
       } finally {
         // Reseta o estado da interface para uma nova busca.
-        // O botão é desabilitado e o texto restaurado.
         searchButton.disabled = true;
+        select.disabled = false; // Reabilita o select
         searchButton.innerHTML =
           '<i class="fas fa-search"></i> Buscar Escritores';
         // Limpa a seleção, forçando o usuário a escolher um novo subgênero para habilitar o botão.
