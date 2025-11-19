@@ -246,11 +246,12 @@ body {
   padding: 30px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
+  /* Usando Grid para uma animação de altura mais suave */
+  display: grid;
+  grid-template-rows: auto 0fr;
+  gap: 15px;
+  transition: grid-template-rows 0.5s ease-out;
   border: 1px solid transparent;
-  transition: border-color 0.3s ease;
   /* Animação de entrada */
   opacity: 0;
   transform: translateY(20px);
@@ -298,22 +299,18 @@ body {
 
 /* Detalhes Colapsáveis */
 .card-details {
-  flex-grow: 1;
-  margin-top: 15px;
   overflow: hidden;
-  max-height: 0;
-  transition: max-height 0.5s ease-out, padding-top 0.5s ease-out;
 }
 
 .card-details > * {
   /* fade-in */
   opacity: 0;
-  transition: opacity 0.4s ease-in;
+  transition: opacity 0.3s ease-in;
 }
 
-.card-details.expanded {
-  max-height: 820px;
-  padding-top: 10px;
+.card.expanded {
+  /* Expande a segunda linha do grid para revelar os detalhes */
+  grid-template-rows: auto 1fr;
 }
 
 .card-details.expanded > * {

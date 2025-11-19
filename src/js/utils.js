@@ -2,10 +2,13 @@
  * Busca autores de um subgênero fazendo uma chamada para o backend.
  * @param {string} subgenre - O subgênero selecionado.
  * @returns {Promise<Array<Object>>} - Uma promessa que resolve com uma lista de autores.
+ * @param {AbortSignal} signal - Um sinal para cancelar a requisição fetch.
  */
-async function getAuthorsFromGemini(subgenre) {
+async function getAuthorsFromGemini(subgenre, signal) {
   try {
-    const response = await fetch(`/api/get-authors?subgenre=${subgenre}`);
+    const response = await fetch(`/api/get-authors?subgenre=${subgenre}`, {
+      signal,
+    });
     if (!response.ok) {
       // Tenta ler a mensagem de erro do backend para fornecer mais detalhes.
       const errorData = await response.json();
@@ -75,23 +78,30 @@ function resultsGrid(authors) {
   // Anexa o fragmento (com todos os cartões) ao DOM de uma vez
   cardGrid.appendChild(fragment);
 
-  // Adiciona os event listeners para os novos botões "Saiba mais"
-  const newToggleButtons = cardGrid.querySelectorAll(".toggle-btn");
-  newToggleButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const targetId = button.getAttribute("data-target");
-      const targetDetails = document.getElementById(targetId);
+  // Usa "Event Delegation" para gerenciar os cliques nos botões.
+  // Um único listener no contêiner pai é mais eficiente.
+  cardGrid.addEventListener("click", (event) => {
+    const button = event.target.closest(".toggle-btn");
 
-      if (targetDetails.classList.contains("expanded")) {
-        targetDetails.classList.remove("expanded");
-        button.classList.remove("expanded");
-        button.innerHTML = 'Saiba mais <i class="fas fa-chevron-down"></i>';
-      } else {
-        targetDetails.classList.add("expanded");
-        button.classList.add("expanded");
-        button.innerHTML =
-          'Ocultar detalhes <i class="fas fa-chevron-down"></i>';
-      }
-    });
+    // Se o clique não foi em um botão, não faz nada.
+    if (!button) return;
+
+    const targetId = button.getAttribute("data-target");
+    const targetDetails = document.getElementById(targetId);
+
+    // Encontra o card pai do botão
+    const parentCard = button.closest(".card");
+
+    if (!targetDetails || !parentCard) return;
+
+    if (parentCard.classList.contains("expanded")) {
+      targetDetails.classList.remove("expanded");
+      parentCard.classList.remove("expanded");
+      button.innerHTML = 'Saiba mais <i class="fas fa-chevron-down"></i>';
+    } else {
+      targetDetails.classList.add("expanded");
+      parentCard.classList.add("expanded");
+      button.innerHTML = 'Ocultar detalhes <i class="fas fa-chevron-down"></i>';
+    }
   });
 }

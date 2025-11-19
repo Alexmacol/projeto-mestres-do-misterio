@@ -4,6 +4,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const resultsSection = document.getElementById("results-section");
   const initialMessage = document.getElementById("initial-message");
 
+  // Controlador para cancelar requisições fetch em andamento
+  let abortController = null;
+
   // Lógica Principal
   select.addEventListener("change", () => {
     if (select.value) {
@@ -13,6 +16,11 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       searchButton.disabled = true;
     }
+
+    // Se o usuário mudar a seleção, cancela qualquer busca anterior em andamento.
+    if (abortController) {
+      abortController.abort();
+    }
   });
 
   searchButton.addEventListener("click", async (event) => {
@@ -21,6 +29,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const selectedGenreText = select.options[select.selectedIndex].text;
 
     if (selectedGenreValue) {
+      // Cancela qualquer busca anterior que ainda esteja em andamento
+      if (abortController) {
+        abortController.abort();
+      }
+
+      // Cria um novo AbortController para a nova requisição.
+      abortController = new AbortController();
+
       searchButton.disabled = true;
       searchButton.innerHTML =
         '<i class="fas fa-spinner fa-spin"></i> Investigando...';
@@ -36,13 +52,21 @@ document.addEventListener("DOMContentLoaded", () => {
       try {
         resultsSection.querySelector("h1").textContent = selectedGenreText;
 
-        const authors = await getAuthorsFromGemini(selectedGenreValue);
+        const authors = await getAuthorsFromGemini(
+          selectedGenreValue,
+          abortController.signal
+        );
         resultsGrid(authors);
 
         if (cardGrid) {
           cardGrid.classList.remove("hidden");
         }
       } catch (error) {
+        // Se o erro foi por cancelamento, não mostre uma mensagem de erro.
+        if (error.name === "AbortError") {
+          console.log("Busca cancelada pelo usuário.");
+          return; // Sai da função silenciosamente.
+        }
         resultsSection.classList.add("hidden");
         initialMessage.classList.remove("hidden");
         initialMessage.innerHTML = `

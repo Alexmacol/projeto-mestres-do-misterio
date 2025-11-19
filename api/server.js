@@ -48,11 +48,7 @@ app.get("/api/get-authors", async (req, res) => {
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     try {
       const model = genAI.getGenerativeModel({
-        model: "gemini-1.5-pro-latest",
-        // Habilita o modo de saída JSON
-        generationConfig: {
-          response_mime_type: "application/json",
-        },
+        model: "gemini-pro",
       });
 
       const prompt = `
@@ -83,8 +79,12 @@ app.get("/api/get-authors", async (req, res) => {
       const response = await result.response;
       const text = await response.text();
 
-      // Com o modo JSON, a resposta já é um JSON válido, basta fazer o parse.
-      const jsonResponse = JSON.parse(text);
+      // Limpa a resposta para garantir que seja um JSON válido, removendo os blocos de código markdown.
+      const cleanedText = text
+        .replace(/```json/g, "")
+        .replace(/```/g, "")
+        .trim();
+      const jsonResponse = JSON.parse(cleanedText);
 
       return res.json(jsonResponse);
     } catch (error) {
