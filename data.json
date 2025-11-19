@@ -1,23 +1,86 @@
 [
-  { "id": "classico", "name": "Clássico" },
-  { "id": "brasileiro", "name": "Brasileiro" },
-  { "id": "conspiracao", "name": "Conspiração" },
-  { "id": "cozy", "name": "Cozy Mystery" },
-  { "id": "espionagem", "name": "Espionagem" },
-  { "id": "forense", "name": "Forense" },
-  { "id": "historico", "name": "Histórico" },
-  { "id": "noir", "name": "Noir (hard-boiled)" },
-  { "id": "nordico", "name": "Nórdico" },
-  { "id": "honkaku", "name": "Ortodoxo (Honkaku)" },
-  { "id": "procedural", "name": "Procedural" },
-  { "id": "psicologico", "name": "Psicológico" },
-  { "id": "sulamericano", "name": "Sul-Americano" },
-  { "id": "tartan noir", "name": "Tartan Noir" },
-  { "id": "techno", "name": "Techno" },
-  { "id": "whodunit", "name": "Whodunit" },
-  { "id": "locked-room", "name": "Quarto Fechado (Locked-Room)" },
-  { "id": "inverted", "name": "Invertido (Howcatchem)" },
-  { "id": "legal", "name": "Thriller Jurídico" },
-  { "id": "sobrenatural", "name": "Sobrenatural" },
-  { "id": "jovem-adulto", "name": "Jovem Adulto (YA)" }
+  {
+    "id": "classico",
+    "name": "Clássico"
+  },
+  {
+    "id": "brasileiro",
+    "name": "Brasileiro"
+  },
+  {
+    "id": "conspiracao",
+    "name": "Conspiração"
+  },
+  {
+    "id": "cozy",
+    "name": "Cozy Mystery"
+  },
+  {
+    "id": "espionagem",
+    "name": "Espionagem"
+  },
+  {
+    "id": "forense",
+    "name": "Forense"
+  },
+  {
+    "id": "historico",
+    "name": "Histórico"
+  },
+  {
+    "id": "noir",
+    "name": "Noir (hard-boiled)"
+  },
+  {
+    "id": "nordico",
+    "name": "Nórdico"
+  },
+  {
+    "id": "honkaku",
+    "name": "Ortodoxo (Honkaku)"
+  },
+  {
+    "id": "procedural",
+    "name": "Procedural"
+  },
+  {
+    "id": "psicologico",
+    "name": "Psicológico"
+  },
+  {
+    "id": "sulamericano",
+    "name": "Sul-Americano"
+  },
+  {
+    "id": "tartan noir",
+    "name": "Tartan Noir"
+  },
+  {
+    "id": "techno",
+    "name": "Techno"
+  },
+  {
+    "id": "whodunit",
+    "name": "Whodunit"
+  },
+  {
+    "id": "locked-room",
+    "name": "Quarto Fechado (Locked-Room)"
+  },
+  {
+    "id": "inverted",
+    "name": "Invertido (Howcatchem)"
+  },
+  {
+    "id": "legal",
+    "name": "Thriller Jurídico"
+  },
+  {
+    "id": "sobrenatural",
+    "name": "Sobrenatural"
+  },
+  {
+    "id": "jovem-adulto",
+    "name": "Jovem Adulto (YA)"
+  }
 ]
