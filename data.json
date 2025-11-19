@@ -13,5 +13,11 @@
   { "id": "psicologico", "name": "Psicológico" },
   { "id": "sulamericano", "name": "Sul-Americano" },
   { "id": "tartan noir", "name": "Tartan Noir" },
-  { "id": "techno", "name": "Techno" }
+  { "id": "techno", "name": "Techno" },
+  { "id": "whodunit", "name": "Whodunit" },
+  { "id": "locked-room", "name": "Quarto Fechado (Locked-Room)" },
+  { "id": "inverted", "name": "Invertido (Howcatchem)" },
+  { "id": "legal", "name": "Thriller Jurídico" },
+  { "id": "sobrenatural", "name": "Sobrenatural" },
+  { "id": "jovem-adulto", "name": "Jovem Adulto (YA)" }
 ]
