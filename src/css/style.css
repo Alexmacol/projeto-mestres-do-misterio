@@ -246,16 +246,14 @@ body {
   padding: 30px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-  /* Usando Grid para uma animação de altura mais suave */
-  display: grid;
-  grid-template-rows: auto 0fr;
-  gap: 15px;
-  transition: grid-template-rows 0.5s ease-out;
   border: 1px solid transparent;
+  transition: border-color 0.3s ease-out;
   /* Animação de entrada */
   opacity: 0;
   transform: translateY(20px);
   animation: fadeInSlideUp 0.5s ease-out forwards;
+  display: flex;
+  flex-direction: column;
 }
 
 .card:hover,
@@ -271,52 +269,50 @@ body {
   }
 }
 
+.card-header {
+  /* display: flex; REMOVED to stack elements vertically */
+  /* justify-content: space-between; REMOVED */
+  /* align-items: flex-start; REMOVED */
+  gap: 15px; /* Keep gap if needed for vertical spacing, or adjust */
+  margin-bottom: 15px;
+}
+
 .card h3 {
-  margin-top: 0;
-  margin-bottom: 0;
+  margin: 0 0 5px 0; /* Adjusted margin to add space below h3 */
   font-size: 1.5em;
   line-height: 1.2;
   text-align: left;
 }
 
 .card .dates {
-  display: inline-block;
   background-color: rgba(185, 142, 59, 0.2);
   color: var(--color-accent-gold);
   padding: 3px 6px;
   border-radius: 4px;
-  font-size: 0.95em;
+  font-size: 0.9em;
   font-weight: bold;
-  margin-bottom: 0;
-  align-self: flex-start;
+  text-align: left;
+  white-space: nowrap;
+  flex-shrink: 0;
+  display: block; /* Added to ensure it takes its own line and respects text-align: left */
 }
 
 .card-details p {
-  margin-bottom: 0;
+  margin: 0 0 15px 0;
   font-size: 1.3em;
-  margin-top: 0;
 }
 
 /* Detalhes Colapsáveis */
 .card-details {
   overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.5s ease-out, margin-top 0.5s ease-out;
+  margin-top: 0;
 }
 
-.card-details > * {
-  /* fade-in */
-  opacity: 0;
-  transition: opacity 0.3s ease-in;
-}
-
-.card.expanded {
-  /* Expande a segunda linha do grid para revelar os detalhes */
-  grid-template-rows: auto 1fr;
-}
-
-.card-details.expanded > * {
-  /* fade-in */
-  opacity: 1;
-  transition-delay: 0.15s;
+.card.expanded .card-details {
+  max-height: 580px; /* Altura suficiente para o conteúdo */
+  margin-top: 15px;
 }
 
 .card-details h4 {
@@ -344,7 +340,7 @@ body {
   color: var(--color-accent-gold);
   cursor: pointer;
   font-weight: bold;
-  padding: 5px 0;
+  padding: 10px 0 0 0;
   margin-top: auto;
   text-align: center;
   transition: color 0.2s, background-color 0.2s;
@@ -362,6 +358,6 @@ body {
 }
 
 /* Rotação do ícone para "Ocultar detalhes" */
-.toggle-btn.expanded i {
+.card.expanded .toggle-btn i {
   transform: rotate(180deg);
 }
