@@ -308,7 +308,7 @@ body {
 }
 
 .card.expanded .card-details {
-  max-height: 600px; /* Altura suficiente para o conteúdo */
+  max-height: 620px; /* Altura suficiente para o conteúdo */
   margin-top: 15px;
 }
 
