@@ -56,7 +56,7 @@ app.get("/api/get-authors", async (req, res) => {
       Retorne a resposta como um objeto JSON. Cada autor deve ter os seguintes campos:
       - "name": (String) O nome do autor.
       - "dates": (String) As datas de nascimento e morte (ex: "1890-1976") ou "em atividade".
-      - "description": (String) Uma descrição objetiva e suscinta (2 frases) sobre o estilo e contribuições do autor para o gênero.
+      - "description": (String) Uma descrição objetiva e sucinta (2 frases) sobre o estilo do autor no gênero.
       - "works": (Array de Strings) Uma lista de 3 obras notáveis. Se as obras foram lançadas no Brasil, use os títulos em português; caso contrário, use os títulos originais.
       
       Não invente autores; use apenas autores reais e verificados.
