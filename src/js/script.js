@@ -1,96 +1,163 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const select = document.getElementById("subgenre-select");
-  const searchButton = document.getElementById("search-button");
-  const resultsSection = document.getElementById("results-section");
-  const initialMessage = document.getElementById("initial-message");
+document.addEventListener('DOMContentLoaded', () => {
+  const select = document.getElementById('subgenre-select');
+  const subgeneroSearchButton = document.getElementById(
+    'subgênero-search-button'
+  );
+  const escritoresSearchButton = document.getElementById(
+    'escritores-search-button'
+  );
+  const resultsSection = document.getElementById('results-section');
+  const initialMessage = document.getElementById('initial-message');
+  const cardGrid = resultsSection.querySelector('.card-grid');
+  const resultsTitle = resultsSection.querySelector('h1');
 
-  // Popula o select com os dados do JSON
-  populateSelectWithOptions("subgenre-select", "data.json");
+  populateSelectWithOptions('subgenre-select', 'data.json');
 
-  // Controlador para cancelar requisições fetch em andamento
   let abortController = null;
 
-  // Lógica Principal
-  select.addEventListener("change", () => {
-    if (select.value) {
-      searchButton.disabled = false;
-      searchButton.innerHTML =
-        '<i class="fas fa-search"></i> Buscar Escritores';
-    } else {
-      searchButton.disabled = true;
-    }
+  // Gerencia a habilitação dos botões e aborta buscas antigas
+  select.addEventListener('change', () => {
+    const isSubgenreSelected = !!select.value;
+    subgeneroSearchButton.disabled = !isSubgenreSelected;
+    escritoresSearchButton.disabled = !isSubgenreSelected;
 
-    // Se o usuário mudar a seleção, cancela qualquer busca anterior em andamento.
     if (abortController) {
-      abortController.abort();
+      abortController.abort(); // Aborta a busca anterior se o usuário mudar de ideia
     }
   });
 
-  searchButton.addEventListener("click", async (event) => {
-    event.preventDefault();
+  // Listeners dos botões
+  subgeneroSearchButton.addEventListener('click', () => {
+    handleSearch('subgenero');
+  });
+
+  escritoresSearchButton.addEventListener('click', () => {
+    handleSearch('escritores');
+  });
+
+  // Função principal de busca
+  const handleSearch = async (searchType) => {
     const selectedGenreValue = select.value;
     const selectedGenreText = select.options[select.selectedIndex].text;
 
-    if (selectedGenreValue) {
-      // Cancela qualquer busca anterior que ainda esteja em andamento
-      if (abortController) {
-        abortController.abort();
-      }
+    if (!selectedGenreValue) return;
 
-      // Cria um novo AbortController para a nova requisição.
-      abortController = new AbortController();
+    if (abortController) {
+      abortController.abort();
+    }
+    abortController = new AbortController();
 
-      searchButton.disabled = true;
-      select.disabled = true; // Desabilita o select
-      searchButton.innerHTML =
-        '<i class="fas fa-spinner fa-spin"></i> Investigando...';
+    const activeButton =
+      searchType === 'subgenero'
+        ? subgeneroSearchButton
+        : escritoresSearchButton;
 
-      initialMessage.classList.add("hidden");
-      resultsSection.classList.remove("hidden");
+    setLoadingState(true, activeButton);
 
-      const cardGrid = resultsSection.querySelector(".card-grid");
-      if (cardGrid) {
-        cardGrid.classList.add("hidden");
-      }
+    try {
+      const response = await fetch('/api/search', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          subgenre: selectedGenreValue,
+          searchType: searchType,
+        }),
+        signal: abortController.signal,
+      });
 
-      try {
-        resultsSection.querySelector("h1").textContent = selectedGenreText;
-
-        const authors = await getAuthorsFromGemini(
-          selectedGenreValue,
-          abortController.signal
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(
+          errorData.error || 'Falha na comunicação com o servidor.'
         );
-        resultsGrid(authors);
+      }
 
-        if (cardGrid) {
-          cardGrid.classList.remove("hidden");
-        }
-      } catch (error) {
-        // Se o erro foi por cancelamento, não mostre uma mensagem de erro.
-        if (error.name === "AbortError") {
-          console.log("Busca cancelada pelo usuário.");
-          return; // Sai da função silenciosamente.
-        }
-        resultsSection.classList.add("hidden");
-        initialMessage.classList.remove("hidden");
-        initialMessage.innerHTML = `
-        <p class="error-message">
-          <i class="fas fa-exclamation-triangle"></i> 
-          ${
-            error.message ||
-            "Ocorreu um erro ao buscar os dados. Tente novamente em instantes."
-          }
-        </p>
-        `;
-      } finally {
-        // Reseta o estado da interface para uma nova busca.
-        searchButton.disabled = true;
-        select.disabled = false; // Reabilita o select
-        searchButton.innerHTML =
-          '<i class="fas fa-search"></i> Buscar Escritores';
-        // Limpa a seleção, forçando o usuário a escolher um novo subgênero para habilitar o botão.
-        select.value = "";
+      const data = await response.json();
+
+      resultsTitle.textContent =
+        searchType === 'subgenero'
+          ? `Sobre o Subgênero ${selectedGenreText}`
+          : `Mestres do Subgênero ${selectedGenreText}`;
+
+      cardGrid.innerHTML = ''; // Limpa resultados antigos
+
+      if (searchType === 'escritores' && Array.isArray(data)) {
+        resultsGrid(data);
+      } else if (searchType === 'subgenero' && data.description) {
+        mountDescriptionCard(data.description);
+      } else {
+        throw new Error('Formato de resposta inesperado do servidor.');
+      }
+    } catch (error) {
+      // Só mostra o erro se não for um erro de aborto (cancelado pelo usuário)
+      if (error.name !== 'AbortError') {
+        showError(error.message);
+      } else {
+        console.log('Busca cancelada pelo usuário.');
+      }
+    } finally {
+      // Garante que a UI seja resetada ao final de toda operação, exceto se foi abortada
+      if (!abortController.signal.aborted) {
+        resetSearchControls();
       }
     }
-  });
+  };
+
+  // Monta o card de descrição
+  const mountDescriptionCard = (description) => {
+    cardGrid.innerHTML = '';
+    const descriptionCard = document.createElement('div');
+    descriptionCard.className = 'card description-card'; // Adicionado a classe 'card'
+    descriptionCard.innerHTML =
+      `
+      <h2>Uma Análise Profunda</h2>
+      <p>${description.replace(/\n/g, '<br>')}</p>
+    `;
+    cardGrid.appendChild(descriptionCard);
+  };
+
+  // --- Funções de Controle da UI ---
+
+  // Coloca a UI em estado de carregamento
+  const setLoadingState = (isLoading, button) => {
+    const controls = [select, subgeneroSearchButton, escritoresSearchButton];
+    controls.forEach((control) => (control.disabled = isLoading));
+
+    if (isLoading) {
+      initialMessage.classList.add('hidden');
+      resultsSection.classList.remove('hidden');
+      cardGrid.innerHTML = ''; // Limpa a área de resultados para o spinner
+      resultsTitle.textContent = 'Investigação em andamento...';
+      button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Investigando...';
+    }
+  };
+
+  // Reseta os controles para uma nova busca
+  const resetSearchControls = () => {
+    select.disabled = false;
+    select.value = ''; // Reseta o valor do select
+
+    // Desabilita os botões, pois o select está sem valor
+    subgeneroSearchButton.disabled = true;
+    escritoresSearchButton.disabled = true;
+
+    // Reseta o texto de AMBOS os botões para garantir que nenhum spinner fique na tela
+    subgeneroSearchButton.innerHTML =
+      '<i class="fas fa-search"></i> Buscar Subgênero';
+    escritoresSearchButton.innerHTML =
+      '<i class="fas fa-search"></i> Buscar Escritores';
+  };
+
+  // Mostra uma mensagem de erro
+  const showError = (message) => {
+    resultsSection.classList.add('hidden');
+    initialMessage.classList.remove('hidden');
+    initialMessage.innerHTML =
+      `<p class="error-message">
+        <i class="fas fa-exclamation-triangle"></i> 
+        ${message || 'Ocorreu um erro. Tente novamente.'}
+      </p>`;
+  };
 });

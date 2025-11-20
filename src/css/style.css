@@ -358,3 +358,24 @@ body {
 .card.expanded .toggle-btn i {
   transform: rotate(180deg);
 }
+
+/* Card de Descrição do Subgênero */
+.description-card {
+  grid-column: 1 / -1; /* Faz o card ocupar toda a largura da grade */
+  /* A aparência base (fundo, sombra, etc.) vem da classe .card adicionada via JS */
+  animation: fadeInSlideUp 0.5s ease-out forwards; /* Garante a animação de entrada */
+}
+
+/* Ajusta o título dentro do card de descrição para ser consistente com os outros cards */
+.description-card h2 {
+  font-size: 1.5em; /* Mesmo tamanho do h3 dos cards de autor */
+  margin: 0 0 15px 0;
+  line-height: 1.2;
+}
+
+/* Ajusta o parágrafo para ter a mesma fonte e cor da descrição dos autores */
+.description-card p {
+  font-size: 1.3em;
+  color: var(--color-text-light);
+  line-height: 1.6;
+}

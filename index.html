@@ -81,7 +81,14 @@
           </select>
           <button
             type="button"
-            id="search-button"
+            id="subgênero-search-button"
+            class="search-btn"
+            disabled>
+            <i class="fas fa-search"></i> Buscar Subgênero
+          </button>
+          <button
+            type="button"
+            id="escritores-search-button"
             class="search-btn"
             disabled>
             <i class="fas fa-search"></i> Buscar Escritores
@@ -94,7 +101,7 @@
         id="initial-message"
         class="state-message">
         <p>
-          Selecione um subgênero e clique em "Buscar Escritores" para investigar
+          Selecione um subgênero e escolha o que buscar
         </p>
       </div>
     </section>
@@ -103,7 +110,7 @@
     <section
       id="results-section"
       class="container hidden">
-      <h1>Grandes Mestres do Gênero</h1>
+      <h1>investigação em andamento...</h1>
 
       <!-- Grid dos Escritores-->
       <div class="card-grid">
