@@ -1,81 +1,81 @@
 # <span style="color: #FFD700;">**Mestres do Mistério**</span>
 
-Um explorador interativo para descobrir os autores mais influentes da literatura de mistério e suspense, utilizando o poder da IA generativa do Google.
+Um explorador interativo para descobrir os autores e as características dos subgêneros da literatura de mistério e suspense, utilizando o poder da IA generativa do Google.
 
 ## Sobre o Projeto
 
-"Mestres do Mistério" é uma aplicação web projetada para amantes da literatura de mistério. A finalidade do projeto é oferecer uma interface simples e elegante onde os usuários podem selecionar um subgênero de mistério e receber uma lista curada de autores notáveis associados a ele. A aplicação consome uma API backend que, por sua vez, utiliza o modelo `gemini-2.5-pro` do Google para gerar dinamicamente informações detalhadas sobre os escritores, incluindo biografias concisas e suas principais obras.
+"Mestres do Mistério" é uma aplicação web de página única (SPA) projetada para amantes da literatura de mistério. A aplicação permite que os usuários explorem o universo do mistério de duas formas distintas: descobrindo os autores mais influentes de um subgênero ou obtendo uma análise aprofundada sobre o próprio subgênero.
 
-## Funcionalidades
+Para isso, a aplicação consome uma API backend construída em Node.js, que centraliza a comunicação com o modelo `gemini-pro-latest` da Google Generative AI para gerar dinamicamente todo o conteúdo apresentado.
+
+## Funcionalidades Principais
 
 - **Seleção de Subgêneros:** Interface com um menu dropdown para escolher entre diversos subgêneros de mistério, como Clássico, Noir, Nórdico, Psicológico, entre outros.
-- **Busca Dinâmica de Autores:** Ao selecionar um gênero, a aplicação busca em tempo real uma lista de autores proeminentes.
-- **Exibição Detalhada:** Apresenta os resultados em cartões, cada um contendo:
-  - Nome do autor
-  - Período de vida (nascimento e morte)
-  - Uma breve descrição de seu estilo e contribuições
-  - Uma lista de 3 de suas obras mais notáveis.
-- **Interface Responsiva:** O layout se adapta a diferentes tamanhos de tela, proporcionando uma boa experiência tanto em desktops quanto em dispositivos móveis.
-- **Feedback Visual:** A interface informa ao usuário quando uma busca está em andamento ou quando ocorre um erro.
+- **Busca Dupla Funcionalidade:** Após selecionar um subgênero, o usuário pode escolher entre:
+  1.  **Buscar Escritores:** Retorna uma lista de 15 autores proeminentes, apresentados em cartões interativos.
+  2.  **Buscar Subgênero:** Retorna uma descrição detalhada sobre as origens, características, temas e obras seminais do subgênero escolhido.
+- **Exibição Detalhada e Interativa:**
+  - **Cartões de Autor:** Cada autor é exibido em um cartão com nome, período de vida, descrição de seu estilo e uma lista de suas principais obras. Os detalhes são expansíveis.
+  - **Cartão de Descrição:** A análise do subgênero é apresentada em um cartão de largura total, formatado para facilitar a leitura.
+- **Experiência de Usuário Refinada:**
+  - A interface informa visualmente quando uma busca está em andamento ("Investigação em andamento...").
+  - As buscas podem ser canceladas: se o usuário selecionar outro subgênero enquanto uma busca está ativa, a requisição anterior é abortada (`AbortController`).
+  - A aplicação se reinicia para um novo estado de busca após cada consulta, melhorando o fluxo de uso.
+- **Design Responsivo:** O layout se adapta a diferentes tamanhos de tela.
 
-## Tecnologias Utilizadas
+## Tecnologias e Métodos
 
 O projeto é dividido em duas partes principais: o frontend (cliente) e o backend (servidor).
 
 **Frontend:**
 - **HTML5:** Estrutura semântica da aplicação.
-- **CSS3:** Estilização e design responsivo.
-- **JavaScript (ES6+):** Manipulação do DOM, interatividade e comunicação com a API.
+- **CSS3:** Estilização e design responsivo, com animações sutis.
+- **JavaScript (ES6+):** Manipulação do DOM, interatividade, `async/await` para chamadas de API e gerenciamento de estado da UI.
 
 **Backend:**
 - **Node.js:** Ambiente de execução para o servidor.
-- **Express.js:** Framework para a criação da API REST.
-- **Google Generative AI SDK (`@google/generative-ai`):** Cliente para interação com a API do Gemini.
+- **Express.js:** Framework para a criação da API.
+- **Google Generative AI SDK (`@google/generative-ai`):** Cliente para interação com a API do Gemini (`gemini-pro-latest`).
 - **`cors`:** Middleware para habilitar o Cross-Origin Resource Sharing.
 - **`dotenv`:** Para gerenciamento de variáveis de ambiente (como a chave da API).
+- **`nodemon`:** Utilizado em ambiente de desenvolvimento para reiniciar o servidor automaticamente.
 
-## Tratamento de Erros
+### Arquitetura da API
 
-A aplicação possui mecanismos para lidar com possíveis falhas:
+A API foi refatorada para usar um único endpoint `POST /api/search`, que aceita um corpo de requisição com o `subgenre` e o `searchType` ('escritores' ou 'subgenero'). Essa abordagem centraliza a lógica e torna o backend mais escalável para futuras funcionalidades.
 
-- **Validação no Backend:** O servidor verifica se a requisição do cliente contém o subgênero necessário antes de prosseguir.
-- **Erro na API Externa:** Se a chamada para a API do Gemini falhar, o backend captura o erro, registra no console e envia uma resposta de erro (Status 500) para o cliente.
-- **Erro na Interface:** O frontend utiliza um bloco `try...catch` para as chamadas de API. Se ocorrer um erro de rede ou se o servidor retornar um status de erro, uma mensagem amigável é exibida na tela, instruindo o usuário a tentar novamente.
-
-## Como Utilizar
+## Como Executar
 
 Para executar este projeto localmente, siga os passos abaixo.
 
 **Pré-requisitos:**
-- **Node.js** instalado (que inclui o npm).
+- **Node.js** instalado (que inclui o `npm`).
 - Uma **chave de API do Google Gemini**. Você pode obter uma no [Google AI Studio](https://aistudio.google.com/).
 
 **Instalação e Execução:**
 
-1.  **Clone o repositório** (ou baixe os arquivos do projeto):
-    ```bash
-    git clone https://github.com/seu-usuario/projeto-misterio.git
-    cd projeto-misterio
-    ```
+1.  **Clone o repositório** (ou baixe e extraia os arquivos do projeto).
 
-2.  **Crie o arquivo de ambiente:**
+2.  **Navegue até a pasta do projeto** pelo seu terminal.
+
+3.  **Crie o arquivo de ambiente:**
     Crie um arquivo chamado `.env` na raiz do projeto e adicione sua chave da API do Gemini:
     ```
     GEMINI_API_KEY=SUA_CHAVE_DE_API_AQUI
     ```
 
-3.  **Instale as dependências do backend:**
+4.  **Instale as dependências do backend:**
     ```bash
     npm install
     ```
 
-4.  **Inicie o servidor backend:**
+5.  **Inicie o servidor backend:**
     ```bash
     npm start
     ```
     O servidor estará rodando em `http://localhost:3000`.
 
-5.  **Abra a aplicação no navegador:**
+6.  **Abra a aplicação no navegador:**
     Abra o arquivo `index.html` diretamente no seu navegador de preferência.
 
-Agora você pode selecionar um subgênero e começar a explorar os mestres do mistério!
+Agora você pode selecionar um subgênero e começar a investigar!
