@@ -28,7 +28,11 @@
   .card {
     padding: 20px;
   }
-  .card-details p, .card-details li {
+  .card-details p {
     font-size: 1.3em;
+  }
+
+  .card-details li {
+    font-size: 1.2em;
   }
 }
