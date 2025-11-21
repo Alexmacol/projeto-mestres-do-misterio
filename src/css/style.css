@@ -4,6 +4,7 @@
   --color-text-light: #fefefe;
   --color-accent-gold: #d6a442;
   --color-accent-red: #df2020;
+  --color-accent-dark-red: #b90404;
   --color-border-card: #3c3c3c;
   --color-button-dark: #610707;
 }
@@ -84,8 +85,8 @@ body {
   font-size: 5em;
   text-align: center;
   margin: 50px 0 20px;
-  background: -webkit-linear-gradient(45deg, #3e4ba0, #1c2086);
-  background: linear-gradient(45deg, #3e4ba0, #1c2086);
+  background: -webkit-linear-gradient(45deg, var(--color-accent-red), var(--color-accent-dark-red));
+  background: linear-gradient(45deg, var(--color-accent-red), var(--color-accent-dark-red));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
