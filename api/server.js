@@ -29,7 +29,7 @@ const getAuthorsPrompt = (subgenre) => `
   Forneça uma lista de 15 autores proeminentes para o subgênero de mistério "${subgenre}".
   Retorne a resposta como um objeto JSON. Cada autor deve ter os seguintes campos:
   - "name": (String) O nome do autor.
-  - "dates": (String) As datas de nascimento e morte (ex: "1890-1976") ou "em atividade".
+  - "dates": (String) As datas de nascimento e morte (ex: "1890-1976") ou "em atividade". Verifique em mais de uma fonte confiável para garantir a precisão quanto às datas de nascimento e morte, ou se o autor ainda está vivo.
   - "description": (String) Descrição objetiva e sucinta (2 frases ou menos) sobre o estilo e contribuição do autor para o gênero.
   - "works": (Array de Strings) Uma lista de 3 obras notáveis. Se as obras foram lançadas no Brasil, use os títulos em português; caso contrário, use os títulos originais.
   
@@ -50,7 +50,7 @@ const getAuthorsPrompt = (subgenre) => `
 `;
 
 const getSubgenreDescriptionPrompt = (subgenre) => `
-  Aja como um especialista em literatura. Forneça uma descrição sucinta e envolvente sobre o subgênero de mistério "${subgenre}".
+  Aja como um especialista em literatura de mistério e suspense. Forneça uma descrição sucinta e envolvente sobre o subgênero de mistério "${subgenre}".
   A descrição deve cobrir os seguintes pontos em um texto coeso:
   - Origens e contexto histórico do subgênero.
   - Principais características, temas e elementos narrativos que o definem.
