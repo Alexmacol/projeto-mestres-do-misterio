@@ -25,6 +25,42 @@ async function getAuthorsFromGemini(subgenre, signal) {
 }
 
 /**
+ * Formata a string de datas dos autores para lidar com múltiplos autores e autores ativos.
+ * Remove a data de nascimento para autores ainda em atividade.
+ * @param {string} datesString - A string de datas original (ex: "YYYY - YYYY, YYYY - ")
+ * @returns {string} - A string de datas formatada com <br> e datas de nascimento removidas para autores ativos.
+ */
+function formatAuthorDates(datesString) {
+  // Primeiro, substitui os delimitadores comuns por <br> para exibição em várias linhas
+  // Usando uma regex mais robusta que lida com variações de espaçamento
+  let processedDates = datesString.replace(/,\s*|\s*&\s*/g, '<br>');
+
+  // Divide por <br> para processar cada entrada de data
+  let dateEntries = processedDates.split('<br>');
+
+  // Processa cada entrada
+  dateEntries = dateEntries.map(entry => {
+    entry = entry.trim();
+
+    // Caso 1: Autor falecido "YYYY - YYYY"
+    // Mantém como está. Não corresponderá aos padrões de autor ativo abaixo.
+    if (entry.match(/^\d{4}\s*-\s*\d{4}$/)) {
+        return entry;
+    }
+    // Caso 2: Autor ativo "YYYY - " (nascimento e ativo) ou "YYYY" (somente nascimento, ativo)
+    // Remove o ano de nascimento se corresponder a um ano seguido por hífen (ativo) ou apenas um ano
+    if (entry.match(/^\d{4}\s*-\s*$/) || entry.match(/^\d{4}$/)) {
+        return ''; // Remove o ano de nascimento para autores ativos
+    }
+    // Padrão: retorna a entrada como está se não corresponder aos padrões acima
+    return entry;
+  });
+
+  // Filtra quaisquer strings vazias resultantes do mapeamento e junta novamente com <br>
+  return dateEntries.filter(entry => entry !== '').join('<br>');
+}
+
+/**
  * Renderiza os cartões dos escritores na grade de resultados.
  * @param {Array<Object>} authors - Uma lista de objetos, onde cada objeto representa um autor.
  * Cada objeto de autor tem as seguintes propriedades:
@@ -58,7 +94,7 @@ function resultsGrid(authors) {
     card.innerHTML = `
       <div class="card-header">
         <h3>${author.name}</h3>
-        <span class="dates">${author.dates}</span>
+        <span class="dates">${formatAuthorDates(author.dates)}</span>
       </div>
 
       <div class="card-details" id="${cardId}">

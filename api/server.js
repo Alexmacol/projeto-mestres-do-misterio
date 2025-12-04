@@ -21,7 +21,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, '..')));
 
 const genAI = new GoogleGenerativeAI(API_KEY);
-const model = genAI.getGenerativeModel({ model: 'gemini-pro-latest' });
+const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
 
 // --- PROMPTS PARA O GEMINI ---
 
@@ -29,7 +29,7 @@ const getAuthorsPrompt = (subgenre) => `
   Forneça uma lista de 15 autores proeminentes para o subgênero de mistério "${subgenre}".
   Retorne a resposta como um objeto JSON. Cada autor deve ter os seguintes campos:
   - "name": (String) O nome do autor.
-  - "dates": (String) As datas de nascimento e morte (ex: "1890-1976") ou "em atividade". Verifique em mais de uma fonte confiável para garantir a precisão quanto às datas de nascimento e morte, ou se o autor ainda está vivo.
+  - "dates": (String) As datas de nascimento e morte (ex: "1890-1976" para falecidos, ou "1950 - em atividade" para vivos). Verifique em mais de uma fonte confiável para garantir a precisão quanto às datas de nascimento e morte, ou se o autor ainda está vivo. Para autores contemporâneos, verifique com atenção extra se eles ainda estão "em atividade" ou se faleceram recentemente.
   - "description": (String) Descrição objetiva e sucinta (2 frases ou menos) sobre o estilo e contribuição do autor para o gênero.
   - "works": (Array de Strings) Uma lista de 3 obras notáveis. Se as obras foram lançadas no Brasil, use os títulos em português; caso contrário, use os títulos originais.
   
@@ -95,23 +95,34 @@ app.post('/api/search', async (req, res) => {
       const response = await result.response;
       const text = await response.text();
 
+      if (!text || text.trim() === '') {
+        throw new Error('A resposta da IA está vazia.');
+      }
+
       const cleanedText = text
         .replace(/```json/g, '')
         .replace(/```/g, '')
         .trim();
-        
-      const jsonResponse = JSON.parse(cleanedText);
 
-      return res.json(jsonResponse);
+      try {
+        const jsonResponse = JSON.parse(cleanedText);
+        return res.json(jsonResponse);
+      } catch (parseError) {
+        console.error(
+          'Falha ao analisar JSON. Texto recebido:',
+          cleanedText
+        );
+        throw new Error('A resposta da IA não é um JSON válido.');
+      }
     } catch (error) {
       console.error(
         `Tentativa ${attempt} de ${MAX_RETRIES} para "${subgenre}" (${searchType}) falhou:`,
-        error
+        error.message
       );
       if (attempt === MAX_RETRIES) {
         return res.status(500).json({
           error:
-            'Ocorreu uma falha ao gerar os dados após múltiplas tentativas. A IA pode estar sobrecarregada.',
+            'Ocorreu uma falha ao gerar os dados após múltiplas tentativas. A IA pode estar sobrecarregada ou retornou um formato inesperado.',
         });
       }
       await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY));

@@ -76,10 +76,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const data = await response.json();
 
-      resultsTitle.textContent =
+      resultsTitle.innerHTML =
         searchType === 'subgenero'
           ? `Sobre o Subgênero ${selectedGenreText}`
           : `Mestres do Subgênero ${selectedGenreText}`;
+      resultsTitle.innerHTML += `<span class="disclaimer">(Informações geradas por IA podem não ser 100% precisas.)</span>`;
 
       cardGrid.innerHTML = ''; // Limpa resultados antigos
 
