@@ -52,6 +52,10 @@
     "name": "Histórico"
   },
   {
+    "id": "howdunit mystery",
+    "name": "Howdunit"
+  },
+  {
     "id": "international crime fiction",
     "name": "International Crime Fiction"
   },
@@ -141,6 +145,10 @@
   },
   {
     "id": "whodunit mystery",
+    "name": "Whodunit"
+  },
+  {
+    "id": "whydunit mystery",
     "name": "Whodunit"
   }
 ]
