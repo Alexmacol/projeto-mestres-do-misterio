@@ -1,5 +1,5 @@
 /* Responsividade em telas menores */ 
-@media (max-width: 768px) {
+@media (max-width: 875px) {
   body {
     padding: 5px;
   }
