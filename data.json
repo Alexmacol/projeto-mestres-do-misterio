@@ -59,9 +59,13 @@
     "id": "inverted",
     "name": "Invertido (Howcatchem)"
   },
-    {
+  {
     "id": "jovem-adulto",
     "name": "Jovem Adulto (YA)"
+  },
+  {
+    "id": "latin-american crime fiction",
+    "name": "Latino-Americano"
   },
   {
     "id": "erotic mistery",
@@ -91,7 +95,7 @@
     "id": "political thriller",
     "name": "Político"
   },
-    {
+  {
     "id": "procedural",
     "name": "Procedural"
   },
@@ -99,7 +103,7 @@
     "id": "psicological thriller",
     "name": "Psicológico"
   },
-    {
+  {
     "id": "locked-room",
     "name": "Quarto Fechado (Locked-Room)"
   },
@@ -111,17 +115,13 @@
     "id": "regionalkrimi",
     "name": "Regionalkrimi (Alemanha)"
   },
-    {
+  {
     "id": "sobrenatural thriller",
     "name": "Sobrenatural"
   },
-    {
+  {
     "id": "soviet noir",
     "name": "Soviet Noir"
-  },
-  {
-    "id": "latin-american crime fiction",
-    "name": "Sul-Americano"
   },
   {
     "id": "tartan noir",
