@@ -8,12 +8,24 @@
     "name": "Brasileiro"
   },
   {
+    "id": "cold war thrillers",
+    "name": "Guerra Fria"
+  },
+  {
+    "id": "war crime fiction",
+    "name": "Crimes de Guerra"
+  },
+  {
     "id": "conspiracao",
     "name": "Conspiração"
   },
   {
     "id": "cozy",
     "name": "Cozy Mystery"
+  },
+  {
+    "id": "detective",
+    "name": "Detetive"
   },
   {
     "id": "espionagem",
@@ -26,6 +38,10 @@
   {
     "id": "historico",
     "name": "Histórico"
+  },
+  {
+    "id": "international crime fiction",
+    "name": "International Crime Fiction"
   },
   {
     "id": "noir",
