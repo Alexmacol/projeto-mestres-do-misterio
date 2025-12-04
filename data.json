@@ -4,6 +4,10 @@
     "name": "Clássico"
   },
   {
+    "id": "black noir",
+    "name": "Black Noir"
+  },
+  {
     "id": "brasileiro",
     "name": "Brasileiro"
   },
@@ -24,8 +28,12 @@
     "name": "Cozy Mystery"
   },
   {
-    "id": "detective",
+    "id": "detective fiction",
     "name": "Detetive"
+  },
+  {
+    "id": "domestic noir",
+    "name": "Doméstico"
   },
   {
     "id": "espionagem",
@@ -94,6 +102,10 @@
     {
     "id": "locked-room",
     "name": "Quarto Fechado (Locked-Room)"
+  },
+  {
+    "id": "queer mystery",
+    "name": "Queer Mystery"
   },
   {
     "id": "regionalkrimi",
