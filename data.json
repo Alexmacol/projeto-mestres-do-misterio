@@ -36,6 +36,10 @@
     "name": "Forense"
   },
   {
+    "id": "giallo",
+    "name": "Giallo"
+  },
+  {
     "id": "historical crime fiction",
     "name": "Histórico"
   },
@@ -46,6 +50,10 @@
   {
     "id": "noir",
     "name": "Noir (hard-boiled)"
+  },
+  {
+    "id": "asian noir",
+    "name": "Noir Asiático"
   },
   {
     "id": "nordico",
