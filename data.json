@@ -1,6 +1,6 @@
 [
   {
-    "id": "classico",
+    "id": "classic crime fiction",
     "name": "Clássico"
   },
   {
@@ -8,7 +8,7 @@
     "name": "Black Noir"
   },
   {
-    "id": "brasileiro",
+    "id": "Brazilian Crime Fiction",
     "name": "Brasileiro"
   },
   {
@@ -120,7 +120,7 @@
     "name": "Soviet Noir"
   },
   {
-    "id": "sulamericano",
+    "id": "latin-american crime fiction",
     "name": "Sul-Americano"
   },
   {
