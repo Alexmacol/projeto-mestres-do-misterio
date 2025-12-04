@@ -64,6 +64,14 @@
     "name": "Ortodoxo (Honkaku)"
   },
   {
+    "id": "outback noir",
+    "name": "Outback Noir"
+  },
+  {
+    "id": "polar noir",
+    "name": "Polar Noir"
+  },
+  {
     "id": "procedural",
     "name": "Procedural"
   },
@@ -86,6 +94,10 @@
   {
     "id": "techno",
     "name": "Techno"
+  },
+  {
+    "id": "thriller français",
+    "name": "Thriller Francês"
   },
   {
     "id": "whodunit",
