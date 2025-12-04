@@ -96,7 +96,7 @@
     "name": "Procedural"
   },
   {
-    "id": "psicologico",
+    "id": "psicological thriller",
     "name": "Psicológico"
   },
     {
@@ -112,7 +112,7 @@
     "name": "Regionalkrimi (Alemanha)"
   },
     {
-    "id": "sobrenatural",
+    "id": "sobrenatural thriller",
     "name": "Sobrenatural"
   },
     {
@@ -136,11 +136,11 @@
     "name": "Thriller Francês"
   },
   {
-    "id": "legal",
+    "id": "legal thriller",
     "name": "Thriller Jurídico"
   },
   {
-    "id": "whodunit",
+    "id": "whodunit mystery",
     "name": "Whodunit"
   }
 ]
