@@ -48,6 +48,18 @@
     "name": "International Crime Fiction"
   },
   {
+    "id": "inverted",
+    "name": "Invertido (Howcatchem)"
+  },
+    {
+    "id": "jovem-adulto",
+    "name": "Jovem Adulto (YA)"
+  },
+  {
+    "id": "erotic mistery",
+    "name": "Mistério Erótico"
+  },
+  {
     "id": "noir",
     "name": "Noir (hard-boiled)"
   },
@@ -68,20 +80,32 @@
     "name": "Outback Noir"
   },
   {
-    "id": "polar noir",
-    "name": "Polar Noir"
+    "id": "political thriller",
+    "name": "Político"
   },
-  {
+    {
     "id": "procedural",
     "name": "Procedural"
   },
   {
-    "id": "political thriller",
-    "name": "Político"
-  },
-  {
     "id": "psicologico",
     "name": "Psicológico"
+  },
+    {
+    "id": "locked-room",
+    "name": "Quarto Fechado (Locked-Room)"
+  },
+  {
+    "id": "regionalkrimi",
+    "name": "Regionalkrimi (Alemanha)"
+  },
+    {
+    "id": "sobrenatural",
+    "name": "Sobrenatural"
+  },
+    {
+    "id": "soviet noir",
+    "name": "Soviet Noir"
   },
   {
     "id": "sulamericano",
@@ -100,31 +124,11 @@
     "name": "Thriller Francês"
   },
   {
-    "id": "whodunit",
-    "name": "Whodunit"
-  },
-  {
-    "id": "locked-room",
-    "name": "Quarto Fechado (Locked-Room)"
-  },
-  {
-    "id": "inverted",
-    "name": "Invertido (Howcatchem)"
-  },
-  {
     "id": "legal",
     "name": "Thriller Jurídico"
   },
   {
-    "id": "sobrenatural",
-    "name": "Sobrenatural"
-  },
-  {
-    "id": "soviet noir",
-    "name": "Soviet Noir"
-  },
-  {
-    "id": "jovem-adulto",
-    "name": "Jovem Adulto (YA)"
+    "id": "whodunit",
+    "name": "Whodunit"
   }
 ]
