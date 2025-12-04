@@ -331,8 +331,10 @@ body {
 }
 
 .card.expanded .card-details {
-  max-height: 650px; /* Altura suficiente para o conteúdo */
+  max-height: 300px; /* Altura suficiente para o conteúdo */
   margin-top: 15px;
+  overflow-y: scroll;
+  padding-right: 10px;
 }
 
 .card-details h4 {
