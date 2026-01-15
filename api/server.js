@@ -57,7 +57,7 @@ const getSubgenreDescriptionPrompt = (subgenre) => `
   - Autores e obras que são considerados pilares ou exemplos seminais do subgênero.
   - Sua evolução e influência na literatura e em outras mídias.
 
-  A resposta deve ser um único parágrafo objetivo e bem escrito.
+  A resposta deve disposta em no máximo 3 parágrafos com máximo de 4 linhas objetivas e bem escritas.
   Retorne a resposta como um objeto JSON com uma única chave "description".
   
   Exemplo de formato da resposta:
