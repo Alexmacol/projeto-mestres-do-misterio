@@ -58,6 +58,8 @@ const getSubgenreDescriptionPrompt = (subgenre) => `
   - Sua evolução e influência na literatura e em outras mídias.
 
   A resposta deve disposta em no máximo 3 parágrafos com máximo de 4 linhas objetivas e bem escritas.
+  Coloque títulos de obras entre aspas (por exemplo, \"O Espião Que Saiu do Frio\").
+  Evite o uso de markdown ou caracteres especiais como asteriscos; apenas acentos ortográficos pertinentes ao português do Brasil devem estar presentes. Não invente nada.
   Retorne a resposta como um objeto JSON com uma única chave "description".
   
   Exemplo de formato da resposta:
