@@ -60,17 +60,15 @@ const getSubgenreDescriptionPrompt = (subgenre) => `
   A resposta deve ser OBRIGATORIAMENTE estruturada em 3 parágrafos distintos. Utilize o caractere de quebra de linha (\\n) para separar claramente os parágrafos dentro da string JSON.
   Cada parágrafo deve ter uma extensão visual aproximada de 3 a 4 linhas de texto padrão.
   
-  Coloque títulos de obras entre aspas (por exemplo, \"O Espião Que Saiu do Frio\").
-
-  REGRA DE FORMATAÇÃO CRÍTICA:
-  Para TODOS os termos, expressões e títulos em inglês ou língua estrangeira, você DEVE usar a tag HTML <i> (exemplo: <i>The Maltese Falcon</i>, <i>Whodunit</i>). Não use asteriscos para itálico.
-
-  Evite o uso de markdown; use apenas as tags HTML <i> especificadas acima. Acentos ortográficos do português são permitidos. Não invente nada.
+  REGRA DE FORMATAÇÃO (CRÍTICA):
+  Utilize a tag HTML <i> para aplicar itálico em TODOS os títulos de obras (ex: <i>O Falcão Maltês</i>, <i>The Big Sleep</i>) e termos em língua estrangeira (ex: <i>whodunit</i>, <i>noir</i>).
+  NÃO utilize aspas para destacar títulos. NÃO utilize markdown (asteriscos).
+  
   Retorne a resposta como um objeto JSON com uma única chave "description".
   
   Exemplo de formato da resposta:
   {
-    "description": "Parágrafo 1 sobre origens...\\n\\nParágrafo 2 sobre características...\\n\\nParágrafo 3 sobre evolução..."
+    "description": "O gênero <i>Noir</i> surgiu na década de 1940.\\n\\nUma obra seminal é <i>The Maltese Falcon</i>, que definiu o estilo.\\n\\nHoje, o termo <i>thriller</i> é amplamente usado."
   }
 `;
 
