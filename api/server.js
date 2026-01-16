@@ -62,9 +62,10 @@ const getSubgenreDescriptionPrompt = (subgenre) => `
   
   Coloque títulos de obras entre aspas (por exemplo, \"O Espião Que Saiu do Frio\").
 
-  Para termos e títulos em inglês, utilize a tag HTML <i> para aplicar itálico (exemplo: <i>The Maltese Falcon</i>).
+  REGRA DE FORMATAÇÃO CRÍTICA:
+  Para TODOS os termos, expressões e títulos em inglês ou língua estrangeira, você DEVE usar a tag HTML <i> (exemplo: <i>The Maltese Falcon</i>, <i>Whodunit</i>). Não use asteriscos para itálico.
 
-  Evite o uso de markdown ou caracteres especiais como asteriscos; apenas acentos ortográficos pertinentes ao português do Brasil devem estar presentes. Não invente nada.
+  Evite o uso de markdown; use apenas as tags HTML <i> especificadas acima. Acentos ortográficos do português são permitidos. Não invente nada.
   Retorne a resposta como um objeto JSON com uma única chave "description".
   
   Exemplo de formato da resposta:
