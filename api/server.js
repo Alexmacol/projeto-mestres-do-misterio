@@ -57,7 +57,7 @@ const getSubgenreDescriptionPrompt = (subgenre) => `
   - Autores e obras que são considerados pilares ou exemplos seminais do subgênero.
   - Sua evolução e influência na literatura e em outras mídias.
 
-  A resposta deve ser exibida em no minimo 2 parágrafos e no máximo 3 parágrafos com máximo de 4 linhas.
+  A resposta deve ser exibida em no minimo 2 parágrafos e no máximo 3 parágrafos. Cada parágrafo deve ter no máximo 4 linhas.
   
   Coloque títulos de obras entre aspas (por exemplo, \"O Espião Que Saiu do Frio\").
 
