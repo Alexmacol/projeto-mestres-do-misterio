@@ -1,14 +1,14 @@
-const express = require('express');
-const cors = require('cors');
-const path = require('path');
-const { GoogleGenerativeAI } = require('@google/generative-ai');
-require('dotenv').config();
+const express = require("express");
+const cors = require("cors");
+const path = require("path");
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+require("dotenv").config();
 
 const API_KEY = process.env.GEMINI_API_KEY;
 
 if (!API_KEY) {
   console.error(
-    'ERRO FATAL: A variável de ambiente GEMINI_API_KEY não foi encontrada.'
+    "ERRO FATAL: A variável de ambiente GEMINI_API_KEY não foi encontrada."
   );
   process.exit(1);
 }
@@ -18,10 +18,10 @@ const port = 3000;
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '..')));
+app.use(express.static(path.join(__dirname, "..")));
 
 const genAI = new GoogleGenerativeAI(API_KEY);
-const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
+const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
 // --- PROMPTS PARA O GEMINI ---
 
@@ -57,7 +57,7 @@ const getSubgenreDescriptionPrompt = (subgenre) => `
   - Autores e obras que são considerados pilares ou exemplos seminais do subgênero.
   - Sua evolução e influência na literatura e em outras mídias.
 
-  A resposta deve ser exibida em no minimo 2 parágrafos e no máximo 3 parágrafos. Cada parágrafo deve ter no máximo 4 linhas.
+  A resposta deve ser estruturada em exatamente 3 parágrafos. Cada parágrafo deve ter uma extensão aproximada de 3 a 4 linhas de texto padrão.
   
   Coloque títulos de obras entre aspas (por exemplo, \"O Espião Que Saiu do Frio\").
 
@@ -72,22 +72,22 @@ const getSubgenreDescriptionPrompt = (subgenre) => `
 
 // --- ENDPOINT UNIFICADO DE BUSCA ---
 
-app.post('/api/search', async (req, res) => {
+app.post("/api/search", async (req, res) => {
   const { subgenre, searchType } = req.body;
 
   if (!subgenre || !searchType) {
     return res
       .status(400)
-      .json({ error: 'O subgênero e o tipo de busca são obrigatórios.' });
+      .json({ error: "O subgênero e o tipo de busca são obrigatórios." });
   }
 
   let prompt;
-  if (searchType === 'escritores') {
+  if (searchType === "escritores") {
     prompt = getAuthorsPrompt(subgenre);
-  } else if (searchType === 'subgenero') {
+  } else if (searchType === "subgenero") {
     prompt = getSubgenreDescriptionPrompt(subgenre);
   } else {
-    return res.status(400).json({ error: 'Tipo de busca inválido.' });
+    return res.status(400).json({ error: "Tipo de busca inválido." });
   }
 
   const MAX_RETRIES = 3;
@@ -99,24 +99,21 @@ app.post('/api/search', async (req, res) => {
       const response = await result.response;
       const text = await response.text();
 
-      if (!text || text.trim() === '') {
-        throw new Error('A resposta da IA está vazia.');
+      if (!text || text.trim() === "") {
+        throw new Error("A resposta da IA está vazia.");
       }
 
       const cleanedText = text
-        .replace(/```json/g, '')
-        .replace(/```/g, '')
+        .replace(/```json/g, "")
+        .replace(/```/g, "")
         .trim();
 
       try {
         const jsonResponse = JSON.parse(cleanedText);
         return res.json(jsonResponse);
       } catch (parseError) {
-        console.error(
-          'Falha ao analisar JSON. Texto recebido:',
-          cleanedText
-        );
-        throw new Error('A resposta da IA não é um JSON válido.');
+        console.error("Falha ao analisar JSON. Texto recebido:", cleanedText);
+        throw new Error("A resposta da IA não é um JSON válido.");
       }
     } catch (error) {
       console.error(
@@ -126,7 +123,7 @@ app.post('/api/search', async (req, res) => {
       if (attempt === MAX_RETRIES) {
         return res.status(500).json({
           error:
-            'Ocorreu uma falha ao gerar os dados após múltiplas tentativas. A IA pode estar sobrecarregada ou retornou um formato inesperado.',
+            "Ocorreu uma falha ao gerar os dados após múltiplas tentativas. A IA pode estar sobrecarregada ou retornou um formato inesperado.",
         });
       }
       await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY));
