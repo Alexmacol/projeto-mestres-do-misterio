@@ -50,14 +50,15 @@ const getAuthorsPrompt = (subgenre) => `
 `;
 
 const getSubgenreDescriptionPrompt = (subgenre) => `
-  Aja como um especialista em literatura de mistério e suspense. Forneça uma descrição sucinta e envolvente ebem escrita sobre o subgênero de mistério "${subgenre}".
+  Aja como um especialista em literatura de mistério e suspense. Forneça uma descrição sucinta e envolvente e bem escrita sobre o subgênero de mistério "${subgenre}".
   A descrição deve cobrir os seguintes pontos em um texto coeso:
   - Origens e contexto histórico do subgênero.
   - Principais características, temas e elementos narrativos que o definem.
   - Autores e obras que são considerados pilares ou exemplos seminais do subgênero.
   - Sua evolução e influência na literatura e em outras mídias.
 
-  A resposta deve ser estruturada em exatamente 3 parágrafos. Cada parágrafo deve ter uma extensão aproximada de 3 a 4 linhas de texto padrão.
+  A resposta deve ser OBRIGATORIAMENTE estruturada em 3 parágrafos distintos. Utilize o caractere de quebra de linha (\\n) para separar claramente os parágrafos dentro da string JSON.
+  Cada parágrafo deve ter uma extensão visual aproximada de 3 a 4 linhas de texto padrão.
   
   Coloque títulos de obras entre aspas (por exemplo, \"O Espião Que Saiu do Frio\").
 
@@ -66,7 +67,7 @@ const getSubgenreDescriptionPrompt = (subgenre) => `
   
   Exemplo de formato da resposta:
   {
-    "description": "O subgênero X originou-se em... Suas principais características são... Um autor seminal é Y com sua obra Z..."
+    "description": "Parágrafo 1 sobre origens...\\n\\nParágrafo 2 sobre características...\\n\\nParágrafo 3 sobre evolução..."
   }
 `;
 
