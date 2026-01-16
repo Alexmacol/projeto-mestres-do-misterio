@@ -50,7 +50,7 @@ const getAuthorsPrompt = (subgenre) => `
 `;
 
 const getSubgenreDescriptionPrompt = (subgenre) => `
-  Aja como um especialista em literatura de mistério e suspense. Forneça uma descrição sucinta e envolvente e bem escrita sobre o subgênero de mistério "${subgenre}".
+  Aja como um especialista em literatura de mistério e suspense. Forneça uma descrição sucinta, objetiva e envolvente sobre o subgênero de mistério "${subgenre}".
   A descrição deve cobrir os seguintes pontos em um texto coeso:
   - Origens e contexto histórico do subgênero.
   - Principais características, temas e elementos narrativos que o definem.
