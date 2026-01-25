@@ -6,7 +6,7 @@ Um explorador interativo para descobrir os autores e as características dos sub
 
 "Mestres do Mistério" é uma aplicação web de página única (SPA) projetada para amantes da literatura de mistério. A aplicação permite que os usuários explorem o universo do mistério de duas formas distintas: descobrindo os autores mais influentes de um subgênero ou obtendo uma análise aprofundada sobre o próprio subgênero.
 
-Para isso, a aplicação consome uma API backend construída em Node.js, que centraliza a comunicação com o modelo `gemini-pro-latest` da Google Generative AI para gerar dinamicamente todo o conteúdo apresentado.
+Para isso, a aplicação consome uma API backend construída em Node.js, que centraliza a comunicação com o modelo `gemini-2.5-flash` da Google Generative AI para gerar dinamicamente todo o conteúdo apresentado.
 
 ## Funcionalidades Principais
 
@@ -35,7 +35,7 @@ O projeto é dividido em duas partes principais: o frontend (cliente) e o backen
 **Backend:**
 - **Node.js:** Ambiente de execução para o servidor.
 - **Express.js:** Framework para a criação da API.
-- **Google Generative AI SDK (`@google/generative-ai`):** Cliente para interação com a API do Gemini (`gemini-pro-latest`).
+- **Google Generative AI SDK (`@google/generative-ai`):** Cliente para interação com a API do Gemini (`gemini-2.5-flash`).
 - **`cors`:** Middleware para habilitar o Cross-Origin Resource Sharing.
 - **`dotenv`:** Para gerenciamento de variáveis de ambiente (como a chave da API).
 - **`nodemon`:** Utilizado em ambiente de desenvolvimento para reiniciar o servidor automaticamente.
