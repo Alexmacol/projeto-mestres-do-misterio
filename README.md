@@ -4,7 +4,7 @@ Um explorador interativo para descobrir os autores e as características dos sub
 
 ![Prévia do projeto Mestres do Mistério](src/image/preview.webp)
 
-Visite em: https://projeto-mestres-do-misterio.vercel.app/
+Visite em: <a href="https://projeto-mestres-do-misterio.vercel.app/" target="_blank" rel="noopener noreferrer">https://projeto-mestres-do-misterio.vercel.app/</a>
 
 ## Sobre o Projeto
 
