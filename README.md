@@ -2,6 +2,9 @@
 
 Um explorador interativo para descobrir os autores e as características dos subgêneros da literatura de mistério e suspense, utilizando o poder da IA generativa do Google.
 
+![Prévia do projeto Mestres do Mistério](src/image/preview.webp)
+
+
 ## Sobre o Projeto
 
 "Mestres do Mistério" é uma aplicação web de página única (SPA) projetada para amantes da literatura de mistério. A aplicação permite que os usuários explorem o universo do mistério de duas formas distintas: descobrindo os autores mais influentes de um subgênero ou obtendo uma análise aprofundada sobre o próprio subgênero.
