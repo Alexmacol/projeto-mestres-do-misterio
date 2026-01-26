@@ -2,9 +2,9 @@
 
 Um explorador interativo para descobrir os autores e as características dos subgêneros da literatura de mistério e suspense, utilizando o poder da IA generativa do Google.
 
-![Prévia do projeto Mestres do Mistério](src/image/preview.webp)
+[![Prévia do projeto Mestres do Mistério](src/image/preview.webp)](https://projeto-mestres-do-misterio.vercel.app/)
+Para abrir o link em uma nova aba, utilize **Ctrl + Clique** (Windows) ou **Cmd + Clique** (Mac).
 
-Visite em: <a href="https://projeto-mestres-do-misterio.vercel.app/" target="_blank" rel="noopener noreferrer">https://projeto-mestres-do-misterio.vercel.app/</a>
 
 ## Sobre o Projeto
 
