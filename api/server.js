@@ -3,12 +3,13 @@ const cors = require("cors");
 const path = require("path");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 require("dotenv").config();
-
+const subgenres = require("../data.json");
+const VALID_SUBGENRES = new Set(subgenres.map((item) => item.id));
 const API_KEY = process.env.GEMINI_API_KEY;
 
 if (!API_KEY) {
   console.error(
-    "ERRO FATAL: A variável de ambiente GEMINI_API_KEY não foi encontrada."
+    "ERRO FATAL: A variável de ambiente GEMINI_API_KEY não foi encontrada.",
   );
   process.exit(1);
 }
@@ -83,6 +84,10 @@ app.post("/api/search", async (req, res) => {
       .json({ error: "O subgênero e o tipo de busca são obrigatórios." });
   }
 
+  if (!VALID_SUBGENRES.has(subgenre)) {
+    return res.status(400).json({ error: "Subgênero inválido." });
+  }
+
   let prompt;
   if (searchType === "escritores") {
     prompt = getAuthorsPrompt(subgenre);
@@ -120,7 +125,7 @@ app.post("/api/search", async (req, res) => {
     } catch (error) {
       console.error(
         `Tentativa ${attempt} de ${MAX_RETRIES} para "${subgenre}" (${searchType}) falhou:`,
-        error.message
+        error.message,
       );
       if (attempt === MAX_RETRIES) {
         return res.status(500).json({
