@@ -18,7 +18,7 @@ if (!API_KEY) {
 const app = express();
 const port = 3000;
 
-app.use(cors());
+app.use(cors({ origin: "http://localhost:3000" }));
 app.use(express.json());
 
 const searchLimiter = rateLimit({
@@ -148,6 +148,10 @@ app.post("/api/search", async (req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`Servidor rodando em http://localhost:${port}`);
-});
+if (require.main === module) {
+  app.listen(port, () => {
+    console.log(`Servidor rodando em http://localhost:${port}`);
+  });
+}
+
+module.exports = app;
