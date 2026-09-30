@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
+const rateLimit = require("express-rate-limit");
 require("dotenv").config();
 const subgenres = require("../data.json");
 const VALID_SUBGENRES = new Set(subgenres.map((item) => item.id));
@@ -19,6 +20,15 @@ const port = 3000;
 
 app.use(cors());
 app.use(express.json());
+
+const searchLimiter = rateLimit({
+  windowMs: 60 * 1000, // janela de 1 minuto
+  max: 10, // no máximo 10 requisições por IP nessa janela
+  message: { error: "Muitas buscas em pouco tempo. Aguarde um instante." },
+});
+
+app.use("/api/", searchLimiter);
+
 app.use(express.static(path.join(__dirname, "..")));
 
 const genAI = new GoogleGenerativeAI(API_KEY);
