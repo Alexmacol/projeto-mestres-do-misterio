@@ -108,7 +108,7 @@ app.post("/api/search", async (req, res) => {
   }
 
   const MAX_RETRIES = 3;
-  const RETRY_DELAY = 2000;
+  const BASE_DELAY = 2000;
 
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     try {
@@ -143,7 +143,8 @@ app.post("/api/search", async (req, res) => {
             "Falha ao gerar os dados após múltiplas tentativas. A IA pode estar sobrecarregada ou retornou um formato inesperado. Tente novamente em alguns instantes.",
         });
       }
-      await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY));
+      const delay = BASE_DELAY * 2 ** (attempt - 1);
+      await new Promise((resolve) => setTimeout(resolve, delay));
     }
   }
 });
