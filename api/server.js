@@ -140,7 +140,7 @@ app.post("/api/search", async (req, res) => {
       if (attempt === MAX_RETRIES) {
         return res.status(500).json({
           error:
-            "Ocorreu uma falha ao gerar os dados após múltiplas tentativas. A IA pode estar sobrecarregada ou retornou um formato inesperado.",
+            "Falha ao gerar os dados após múltiplas tentativas. A IA pode estar sobrecarregada ou retornou um formato inesperado. Tente novamente em alguns instantes.",
         });
       }
       await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY));
