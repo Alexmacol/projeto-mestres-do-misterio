@@ -116,32 +116,6 @@ function resultsGrid(authors) {
   // Anexa o fragmento (com todos os cartões) ao DOM de uma vez
   cardGrid.appendChild(fragment);
 
-  // Usa "Event Delegation" para gerenciar os cliques nos botões.
-  // Um único listener no contêiner pai é mais eficiente.
-  cardGrid.addEventListener("click", (event) => {
-    const button = event.target.closest(".toggle-btn");
-
-    // Se o clique não foi em um botão, não faz nada.
-    if (!button) return;
-
-    const targetId = button.getAttribute("data-target");
-    const targetDetails = document.getElementById(targetId);
-
-11    // Encontra o card pai do botão
-    const parentCard = button.closest(".card");
-
-    if (!targetDetails || !parentCard) return;
-
-    if (parentCard.classList.contains("expanded")) {
-      targetDetails.classList.remove("expanded");
-      parentCard.classList.remove("expanded");
-      button.innerHTML = 'Saiba mais <i class="fas fa-chevron-down"></i>';
-    } else {
-      targetDetails.classList.add("expanded");
-      parentCard.classList.add("expanded");
-      button.innerHTML = 'Ocultar detalhes <i class="fas fa-chevron-down"></i>';
-    }
-  });
 }
 
 /**
