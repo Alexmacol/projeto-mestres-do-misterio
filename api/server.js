@@ -32,7 +32,10 @@ app.use("/api/", searchLimiter);
 app.use(express.static(path.join(__dirname, "..")));
 
 const genAI = new GoogleGenerativeAI(API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+const primaryModel = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+const fallbackModel = genAI.getGenerativeModel({
+  model: "gemini-3.5-flash-lite",
+});
 
 // --- PROMPTS PARA O GEMINI ---
 
@@ -112,6 +115,11 @@ app.post("/api/search", async (req, res) => {
 
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     try {
+      const isLastAttempt = attempt === MAX_RETRIES;
+      const model = isLastAttempt ? fallbackModel : primaryModel;
+      console.log(
+        `Tentativa ${attempt}: ${isLastAttempt ? "modelo de reserva" : "modelo principal"}`,
+      );
       const result = await model.generateContent(prompt);
       const response = await result.response;
       const text = await response.text();
