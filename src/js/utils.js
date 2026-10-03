@@ -61,6 +61,21 @@ function formatAuthorDates(datesString) {
 }
 
 /**
+ * Escapa caracteres especiais do HTML para que o texto seja exibido
+ * como texto comum, e nunca interpretado como código.
+ * @param {string} text - O texto a ser escapado.
+ * @returns {string} - O texto seguro para ser inserido via innerHTML.
+ */
+function escapeHtml(text) {
+  return String(text)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+/**
  * Renderiza os cartões dos escritores na grade de resultados.
  * @param {Array<Object>} authors - Uma lista de objetos, onde cada objeto representa um autor.
  * Cada objeto de autor tem as seguintes propriedades:
