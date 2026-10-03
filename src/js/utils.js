@@ -108,15 +108,15 @@ function resultsGrid(authors) {
     card.style.animationDelay = `${index * 50}ms`;
     card.innerHTML = `
       <div class="card-header">
-        <h3>${author.name}</h3>
+        <h3>${escapeHtml(author.name)}</h3>
         <span class="dates">${formatAuthorDates(author.dates)}</span>
       </div>
 
       <div class="card-details" id="${cardId}">
-        <p>${author.description}</p>
+        <p>${escapeHtml(author.description)}</p>
         <h4><i class="fas fa-book-open"></i> Principais Obras</h4>
         <ul>
-          ${author.works.map((work) => `<li>${work}</li>`).join("")}
+          ${author.works.map((work) => `<li>${escapeHtml(work)}</li>`).join("")}
         </ul>
       </div>
 
