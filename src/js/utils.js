@@ -13,7 +13,7 @@ async function getAuthorsFromGemini(subgenre, signal) {
       // Tenta ler a mensagem de erro do backend para fornecer mais detalhes.
       const errorData = await response.json();
       throw new Error(
-        errorData.error || `Erro na requisição: ${response.statusText}`
+        errorData.error || `Erro na requisição: ${response.statusText}`,
       );
     }
     const authors = await response.json();
@@ -33,31 +33,31 @@ async function getAuthorsFromGemini(subgenre, signal) {
 function formatAuthorDates(datesString) {
   // Primeiro, substitui os delimitadores comuns por <br> para exibição em várias linhas
   // Usando uma regex mais robusta que lida com variações de espaçamento
-  let processedDates = datesString.replace(/,\s*|\s*&\s*/g, '<br>');
+  let processedDates = datesString.replace(/,\s*|\s*&\s*/g, "<br>");
 
   // Divide por <br> para processar cada entrada de data
-  let dateEntries = processedDates.split('<br>');
+  let dateEntries = processedDates.split("<br>");
 
   // Processa cada entrada
-  dateEntries = dateEntries.map(entry => {
+  dateEntries = dateEntries.map((entry) => {
     entry = entry.trim();
 
     // Caso 1: Autor falecido "YYYY - YYYY"
     // Mantém como está. Não corresponderá aos padrões de autor ativo abaixo.
     if (entry.match(/^\d{4}\s*-\s*\d{4}$/)) {
-        return entry;
+      return entry;
     }
     // Caso 2: Autor ativo "YYYY - " (nascimento e ativo) ou "YYYY" (somente nascimento, ativo)
     // Remove o ano de nascimento se corresponder a um ano seguido por hífen (ativo) ou apenas um ano
     if (entry.match(/^\d{4}\s*-\s*$/) || entry.match(/^\d{4}$/)) {
-        return ''; // Remove o ano de nascimento para autores ativos
+      return ""; // Remove o ano de nascimento para autores ativos
     }
     // Padrão: retorna a entrada como está se não corresponder aos padrões acima
     return entry;
   });
 
   // Filtra quaisquer strings vazias resultantes do mapeamento e junta novamente com <br>
-  return dateEntries.filter(entry => entry !== '').join('<br>');
+  return dateEntries.filter((entry) => entry !== "").join("<br>");
 }
 
 /**
@@ -130,7 +130,6 @@ function resultsGrid(authors) {
 
   // Anexa o fragmento (com todos os cartões) ao DOM de uma vez
   cardGrid.appendChild(fragment);
-
 }
 
 /**
@@ -154,19 +153,19 @@ async function populateSelectWithOptions(selectId, jsonUrl) {
 
     // Adiciona a opção de placeholder manualmente, caso não exista
     if (!select.querySelector('option[value=""]')) {
-      const placeholderOption = document.createElement('option');
+      const placeholderOption = document.createElement("option");
       placeholderOption.value = "";
       placeholderOption.textContent = "Selecione um subgênero...";
       select.appendChild(placeholderOption);
     }
 
-    data.forEach(item => {
-      const option = document.createElement('option');
+    data.forEach((item) => {
+      const option = document.createElement("option");
       option.value = item.id;
       option.textContent = item.name;
       select.appendChild(option);
     });
   } catch (error) {
-    console.error('Erro ao popular o select:', error);
+    console.error("Erro ao popular o select:", error);
   }
 }
