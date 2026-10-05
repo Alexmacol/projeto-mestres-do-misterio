@@ -57,7 +57,10 @@ function formatAuthorDates(datesString) {
   });
 
   // Filtra quaisquer strings vazias resultantes do mapeamento e junta novamente com <br>
-  return dateEntries.filter((entry) => entry !== "").join("<br>");
+  return dateEntries
+    .filter((entry) => entry !== "")
+    .map((entry) => escapeHtml(entry))
+    .join("<br>");
 }
 
 /**
