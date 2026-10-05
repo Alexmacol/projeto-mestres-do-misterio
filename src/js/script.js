@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", () => {
     descriptionCard.className = "card description-card"; // Adicionado a classe 'card'
     descriptionCard.innerHTML = `
       <h2>Uma Análise Profunda</h2>
-      <p>${description.replace(/\n/g, "<br>")}</p>
+      <p>${sanitizeItalics(description).replace(/\n/g, "<br>")}</p>
     `;
     cardGrid.appendChild(descriptionCard);
   };
