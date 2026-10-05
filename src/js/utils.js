@@ -79,6 +79,18 @@ function escapeHtml(text) {
 }
 
 /**
+ * Escapa todo o HTML do texto, mas preserva as tags <i> e </i>,
+ * usadas pela IA para aplicar itálico em títulos de obras.
+ * @param {string} text - O texto vindo da IA.
+ * @returns {string} - O texto seguro, com apenas <i> e </i> ativos.
+ */
+function sanitizeItalics(text) {
+  return escapeHtml(text)
+    .replace(/&lt;i&gt;/g, "<i>")
+    .replace(/&lt;\/i&gt;/g, "</i>");
+}
+
+/**
  * Renderiza os cartões dos escritores na grade de resultados.
  * @param {Array<Object>} authors - Uma lista de objetos, onde cada objeto representa um autor.
  * Cada objeto de autor tem as seguintes propriedades:
