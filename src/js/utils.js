@@ -79,15 +79,17 @@ function escapeHtml(text) {
 }
 
 /**
- * Escapa todo o HTML do texto, mas preserva as tags <i> e </i>,
- * usadas pela IA para aplicar itálico em títulos de obras.
+ * Escapa todo o HTML do texto, mas preserva as tags <i> e </i>
+ * (usadas pela IA para itálico em títulos de obras) e converte
+ * trechos entre crases (`texto`), caso a IA use markdown, em <i>.
  * @param {string} text - O texto vindo da IA.
  * @returns {string} - O texto seguro, com apenas <i> e </i> ativos.
  */
 function sanitizeItalics(text) {
   return escapeHtml(text)
     .replace(/&lt;i&gt;/g, "<i>")
-    .replace(/&lt;\/i&gt;/g, "</i>");
+    .replace(/&lt;\/i&gt;/g, "</i>")
+    .replace(/`([^`]+)`/g, "<i>$1</i>");
 }
 
 /**
