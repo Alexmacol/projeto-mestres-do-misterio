@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const resultsSection = document.getElementById("results-section");
   const initialMessage = document.getElementById("initial-message");
   const cardGrid = resultsSection.querySelector(".card-grid");
-  const resultsTitle = resultsSection.querySelector("h1");
+  const resultsTitle = resultsSection.querySelector(".results-title");
 
   // Usa "Event Delegation" para gerenciar os cliques nos botões.
   // Um único listener no contêiner pai é mais eficiente.

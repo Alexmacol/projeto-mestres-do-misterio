@@ -242,7 +242,7 @@ body {
 }
 
 /* Seção de Resultados e Cards */
-#results-section h1 {
+#results-section .results-title {
   font-size: 2em;
   text-align: center;
   margin-bottom: 40px;
