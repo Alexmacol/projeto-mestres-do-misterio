@@ -73,7 +73,7 @@ body {
 }
 
 /* Classe para esconder elementos visualmente, mas mantê-los acessíveis para leitores de tela */
-.visually_hidden {
+.visually-hidden {
   position: absolute;
   width: 1px;
   height: 1px;
