@@ -184,7 +184,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initialMessage.classList.remove("hidden");
     initialMessage.innerHTML = `<p class="error-message">
         <i class="fas fa-exclamation-triangle"></i> 
-        ${message || "Ocorreu um erro. Tente novamente."}
+        ${escapeHtml(message || "Ocorreu um erro. Tente novamente.")}
       </p>`;
   };
 });
