@@ -76,7 +76,9 @@ const getSubgenreDescriptionPrompt = (subgenre) => `
   
   REGRA DE FORMATAÇÃO (CRÍTICA):
   Utilize a tag HTML <i> para aplicar itálico em TODOS os títulos de obras (ex: <i>O Falcão Maltês</i>, <i>The Big Sleep</i>) e termos em língua estrangeira (ex: <i>whodunit</i>, <i>noir</i>).
-  NÃO utilize aspas para destacar títulos. NÃO utilize markdown (asteriscos).
+  NÃO utilize aspas para destacar títulos.
+  NÃO utilize markdown de nenhum tipo: nem asteriscos, nem acento grave (crase), nem sublinhados.
+  Para itálico, use SOMENTE as tags <i> e </i>.
   
   Retorne a resposta como um objeto JSON com uma única chave "description".
   
