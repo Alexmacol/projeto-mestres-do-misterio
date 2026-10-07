@@ -80,6 +80,6 @@ Para executar este projeto localmente, siga os passos abaixo.
     O servidor estará rodando em `http://localhost:3000`.
 
 6.  **Abra a aplicação no navegador:**
-    Abra o arquivo `index.html` diretamente no seu navegador de preferência.
+    Acesse `http://localhost:3000`. O servidor entrega o front-end e a API juntos. Abrir o `index.html` diretamente do disco (endereço `file://`) não funciona, porque as chamadas à API (`/api/search`) são relativas ao endereço do servidor.
 
 Agora você pode selecionar um subgênero e começar a investigar!
