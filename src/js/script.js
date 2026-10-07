@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const select = document.getElementById("subgenre-select");
   const subgeneroSearchButton = document.getElementById(
-    "subgênero-search-button",
+    "subgenero-search-button",
   );
   const escritoresSearchButton = document.getElementById(
     "escritores-search-button",
