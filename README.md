@@ -23,7 +23,6 @@ Para isso, a aplicação consome uma API backend construída em Node.js, que cen
   - **Cartão de Descrição:** A análise do subgênero é apresentada em um cartão de largura total, formatado para facilitar a leitura.
 - **Experiência de Usuário Refinada:**
   - A interface informa visualmente quando uma busca está em andamento ("Investigação em andamento...").
-  - As buscas podem ser canceladas: se o usuário selecionar outro subgênero enquanto uma busca está ativa, a requisição anterior é abortada (`AbortController`).
   - A aplicação se reinicia para um novo estado de busca após cada consulta, melhorando o fluxo de uso.
 - **Design Responsivo:** O layout se adapta a diferentes tamanhos de tela.
 
