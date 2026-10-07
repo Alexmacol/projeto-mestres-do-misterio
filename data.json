@@ -4,11 +4,11 @@
     "name": "Clássico"
   },
   {
-    "id": "african american mistery",
+    "id": "african american mystery",
     "name": "Black Noir"
   },
   {
-    "id": "Brazilian Crime Fiction",
+    "id": "brazilian crime fiction",
     "name": "Brasileiro"
   },
   {
@@ -20,11 +20,11 @@
     "name": "Crimes de Guerra"
   },
   {
-    "id": "conspiracao",
+    "id": "conspiracy thriller",
     "name": "Conspiração"
   },
   {
-    "id": "cozy",
+    "id": "cozy mystery",
     "name": "Cozy Mystery"
   },
   {
@@ -36,11 +36,11 @@
     "name": "Domestic Noir"
   },
   {
-    "id": "espionagem",
+    "id": "spy thriller",
     "name": "Espionagem"
   },
   {
-    "id": "forense",
+    "id": "forensic thriller",
     "name": "Forense"
   },
   {
@@ -60,11 +60,11 @@
     "name": "International Crime Fiction"
   },
   {
-    "id": "inverted",
+    "id": "inverted mystery",
     "name": "Invertido (Howcatchem)"
   },
   {
-    "id": "jovem-adulto",
+    "id": "young adult mystery",
     "name": "Jovem Adulto (YA)"
   },
   {
@@ -72,7 +72,7 @@
     "name": "Latino-Americano"
   },
   {
-    "id": "erotic mistery",
+    "id": "erotic mystery",
     "name": "Mistério Erótico"
   },
   {
@@ -84,7 +84,7 @@
     "name": "Noir Asiático"
   },
   {
-    "id": "nordico",
+    "id": "nordic noir",
     "name": "Nórdico"
   },
   {
@@ -100,15 +100,15 @@
     "name": "Político"
   },
   {
-    "id": "procedural",
+    "id": "police procedural",
     "name": "Procedural"
   },
   {
-    "id": "psicological thriller",
+    "id": "psychological thriller",
     "name": "Psicológico"
   },
   {
-    "id": "locked-room",
+    "id": "locked-room mystery",
     "name": "Quarto Fechado (Locked-Room)"
   },
   {
@@ -120,7 +120,7 @@
     "name": "Regionalkrimi (Alemanha)"
   },
   {
-    "id": "sobrenatural thriller",
+    "id": "supernatural thriller",
     "name": "Sobrenatural"
   },
   {
@@ -132,11 +132,11 @@
     "name": "Tartan Noir"
   },
   {
-    "id": "techno",
+    "id": "techno thriller",
     "name": "Techno"
   },
   {
-    "id": "thriller français",
+    "id": "french thriller",
     "name": "Thriller Francês"
   },
   {
