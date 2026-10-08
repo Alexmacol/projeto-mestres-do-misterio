@@ -406,8 +406,6 @@ body {
 }
 
 footer {
-  bottom: 0;
-  left: 0;
   width: 100%;
   background-color: var(--color-bg-dark);
   padding: 15px 20px;
