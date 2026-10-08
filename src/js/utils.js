@@ -1,30 +1,4 @@
 /**
- * Busca autores de um subgênero fazendo uma chamada para o backend.
- * @param {string} subgenre - O subgênero selecionado.
- * @returns {Promise<Array<Object>>} - Uma promessa que resolve com uma lista de autores.
- * @param {AbortSignal} signal - Um sinal para cancelar a requisição fetch.
- */
-async function getAuthorsFromGemini(subgenre, signal) {
-  try {
-    const response = await fetch(`/api/get-authors?subgenre=${subgenre}`, {
-      signal,
-    });
-    if (!response.ok) {
-      // Tenta ler a mensagem de erro do backend para fornecer mais detalhes.
-      const errorData = await response.json();
-      throw new Error(
-        errorData.error || `Erro na requisição: ${response.statusText}`,
-      );
-    }
-    const authors = await response.json();
-    return authors;
-  } catch (error) {
-    console.error("Falha ao buscar autores:", error);
-    throw error;
-  }
-}
-
-/**
  * Formata a string de datas dos autores para lidar com múltiplos autores e autores ativos.
  * Remove a data de nascimento para autores ainda em atividade.
  * @param {string} datesString - A string de datas original (ex: "YYYY - YYYY, YYYY - ")
