@@ -18,6 +18,10 @@ if (!API_KEY) {
 const app = express();
 const port = 3000;
 
+// Na Vercel há um proxy entre o visitante e a função. Com isso o Express
+// lê o IP real do visitante (X-Forwarded-For), e o rate limit conta por pessoa.
+app.set("trust proxy", 1);
+
 app.use(cors({ origin: "http://localhost:3000" }));
 app.use(express.json());
 
