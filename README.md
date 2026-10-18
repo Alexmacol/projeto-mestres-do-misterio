@@ -51,6 +51,8 @@ A API foi refatorada para usar um único endpoint `POST /api/search`, que aceita
 - **Validação do subgênero:** o servidor só aceita os `id` listados no `data.json`. Qualquer outro valor é recusado com erro 400, o que impede que um texto qualquer chegue ao prompt enviado ao Gemini.
 - **Limite de requisições:** no máximo 10 buscas por minuto por IP (`express-rate-limit`), para proteger a chave da API e a cota do Gemini.
 
+**Resiliência:** quando o Gemini falha, está sobrecarregado ou devolve uma resposta inválida, o servidor faz até 3 tentativas, com espera crescente entre elas (2 s e 4 s). As duas primeiras usam o modelo principal (`gemini-2.5-flash`) e a terceira usa o modelo de reserva (`gemini-3.5-flash-lite`).
+
 ## Como Executar
 
 Para executar este projeto localmente, siga os passos abaixo.
