@@ -52,7 +52,7 @@ A API foi refatorada para usar um único endpoint `POST /api/search`, que aceita
 Para executar este projeto localmente, siga os passos abaixo.
 
 **Pré-requisitos:**
-- **Node.js** instalado (que inclui o `npm`).
+- **Node.js 22.x** instalado (que inclui o `npm`). É a versão declarada no `package.json` e usada no deploy da Vercel.
 - Uma **chave de API do Google Gemini**. Você pode obter uma no [Google AI Studio](https://aistudio.google.com/).
 
 **Instalação e Execução:**
