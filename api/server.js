@@ -92,6 +92,27 @@ const getSubgenreDescriptionPrompt = (subgenre) => `
   }
 `;
 
+// --- VALIDAÇÃO DO FORMATO DA RESPOSTA DA IA ---
+
+const isValidAuthor = (author) =>
+  author &&
+  typeof author.name === "string" &&
+  typeof author.dates === "string" &&
+  typeof author.description === "string" &&
+  Array.isArray(author.works) &&
+  author.works.every((work) => typeof work === "string");
+
+const isValidResponse = (searchType, data) => {
+  if (searchType === "escritores") {
+    return Array.isArray(data) && data.length > 0 && data.every(isValidAuthor);
+  }
+  return (
+    data &&
+    typeof data.description === "string" &&
+    data.description.trim() !== ""
+  );
+};
+
 // --- ENDPOINT UNIFICADO DE BUSCA ---
 
 app.post("/api/search", async (req, res) => {
@@ -139,13 +160,20 @@ app.post("/api/search", async (req, res) => {
         .replace(/```/g, "")
         .trim();
 
+      let jsonResponse;
       try {
-        const jsonResponse = JSON.parse(cleanedText);
-        return res.json(jsonResponse);
+        jsonResponse = JSON.parse(cleanedText);
       } catch (parseError) {
         console.error("Falha ao analisar JSON. Texto recebido:", cleanedText);
         throw new Error("A resposta da IA não é um JSON válido.");
       }
+
+      if (!isValidResponse(searchType, jsonResponse)) {
+        console.error("Formato inesperado. Texto recebido:", cleanedText);
+        throw new Error("A resposta da IA não tem o formato esperado.");
+      }
+
+      return res.json(jsonResponse);
     } catch (error) {
       console.error(
         `Tentativa ${attempt} de ${MAX_RETRIES} para "${subgenre}" (${searchType}) falhou:`,
