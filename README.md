@@ -47,6 +47,10 @@ O projeto é dividido em duas partes principais: o frontend (cliente) e o backen
 
 A API foi refatorada para usar um único endpoint `POST /api/search`, que aceita um corpo de requisição com o `subgenre` e o `searchType` ('escritores' ou 'subgenero'). Essa abordagem centraliza a lógica e torna o backend mais escalável para futuras funcionalidades.
 
+**Proteções da API:**
+- **Validação do subgênero:** o servidor só aceita os `id` listados no `data.json`. Qualquer outro valor é recusado com erro 400, o que impede que um texto qualquer chegue ao prompt enviado ao Gemini.
+- **Limite de requisições:** no máximo 10 buscas por minuto por IP (`express-rate-limit`), para proteger a chave da API e a cota do Gemini.
+
 ## Como Executar
 
 Para executar este projeto localmente, siga os passos abaixo.
