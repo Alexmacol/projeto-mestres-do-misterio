@@ -88,3 +88,11 @@ Para executar este projeto localmente, siga os passos abaixo.
     Acesse `http://localhost:3000`. O servidor entrega o front-end e a API juntos. Abrir o `index.html` diretamente do disco (endereço `file://`) não funciona, porque as chamadas à API (`/api/search`) são relativas ao endereço do servidor.
 
 Agora você pode selecionar um subgênero e começar a investigar!
+
+## Deploy
+
+O projeto está publicado na Vercel: https://projeto-mestres-do-misterio.vercel.app/
+
+- A cada `git push` na branch `main`, a Vercel faz um novo deploy automaticamente.
+- A chave do Gemini fica na variável de ambiente `GEMINI_API_KEY`, configurada no painel do projeto na Vercel. O arquivo `.env` é usado apenas localmente e não é enviado ao GitHub.
+- O arquivo `vercel.json` define como o servidor (`api/server.js`) e os arquivos estáticos são publicados.
