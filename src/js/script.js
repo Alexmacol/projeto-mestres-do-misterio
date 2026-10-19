@@ -95,7 +95,8 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
+        // O corpo do erro pode não ser JSON (vazio, ou uma página de erro em HTML)
+        const errorData = await response.json().catch(() => ({}));
         throw new Error(
           errorData.error || "Falha na comunicação com o servidor.",
         );
