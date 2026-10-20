@@ -111,7 +111,11 @@ function resultsGrid(authors) {
         </ul>
       </div>
 
-      <button class="toggle-btn" data-target="${cardId}">
+      <button
+        class="toggle-btn"
+        data-target="${cardId}"
+        aria-expanded="false"
+        aria-controls="${cardId}">
         Saiba mais <i class="fas fa-chevron-down"></i>
       </button>
     `;

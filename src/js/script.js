@@ -30,10 +30,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (parentCard.classList.contains("expanded")) {
       targetDetails.classList.remove("expanded");
       parentCard.classList.remove("expanded");
+      button.setAttribute("aria-expanded", "false");
       button.innerHTML = 'Saiba mais <i class="fas fa-chevron-down"></i>';
     } else {
       targetDetails.classList.add("expanded");
       parentCard.classList.add("expanded");
+      button.setAttribute("aria-expanded", "true");
       button.innerHTML = 'Ocultar detalhes <i class="fas fa-chevron-down"></i>';
     }
   });
