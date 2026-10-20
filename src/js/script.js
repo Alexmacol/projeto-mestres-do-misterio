@@ -185,7 +185,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const showError = (message) => {
     resultsSection.classList.add("hidden");
     initialMessage.classList.remove("hidden");
-    initialMessage.innerHTML = `<p class="error-message">
+    initialMessage.innerHTML = `<p class="error-message" role="alert">
         <i class="fas fa-exclamation-triangle"></i> 
         ${escapeHtml(message || "Ocorreu um erro. Tente novamente.")}
       </p>`;
