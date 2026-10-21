@@ -116,8 +116,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       resultsTitle.innerHTML =
         searchType === "subgenero"
-          ? `Sobre o Subgênero ${selectedGenreText}`
-          : `Mestres do Subgênero ${selectedGenreText}`;
+          ? `Sobre o Subgênero ${escapeHtml(selectedGenreText)}`
+          : `Mestres do Subgênero ${escapeHtml(selectedGenreText)}`;
       resultsTitle.innerHTML += `<span class="disclaimer">(Informações geradas por IA podem não ser 100% precisas.)</span>`;
 
       cardGrid.innerHTML = ""; // Limpa resultados antigos
