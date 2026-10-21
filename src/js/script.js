@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const initialMessage = document.getElementById("initial-message");
   const cardGrid = resultsSection.querySelector(".card-grid");
   const resultsTitle = resultsSection.querySelector(".results-title");
+  const statusMessage = document.getElementById("status-message");
 
   // Usa "Event Delegation" para gerenciar os cliques nos botões.
   // Um único listener no contêiner pai é mais eficiente.
@@ -160,6 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
       resultsSection.classList.remove("hidden");
       cardGrid.innerHTML = ""; // Limpa a área de resultados para o spinner
       resultsTitle.textContent = "Investigação em andamento...";
+      statusMessage.textContent = "Investigação em andamento...";
       button.innerHTML =
         '<i class="fas fa-spinner fa-spin"></i> Investigando...';
     }
