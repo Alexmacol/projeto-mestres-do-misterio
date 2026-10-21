@@ -122,6 +122,11 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         throw new Error("Formato de resposta inesperado do servidor.");
       }
+
+      statusMessage.textContent =
+        searchType === "subgenero"
+          ? `Análise do subgênero ${selectedGenreText} pronta.`
+          : `Lista de escritores do subgênero ${selectedGenreText} pronta.`;
     } catch (error) {
       // Só mostra o erro se não for um erro de aborto (cancelado pelo usuário)
       if (error.name !== "AbortError") {
@@ -185,6 +190,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Mostra uma mensagem de erro
   const showError = (message) => {
+    statusMessage.textContent = "";
     resultsSection.classList.add("hidden");
     initialMessage.classList.remove("hidden");
     initialMessage.innerHTML = `<p class="error-message" role="alert">
