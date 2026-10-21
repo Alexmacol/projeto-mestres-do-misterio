@@ -95,6 +95,13 @@ document.addEventListener("DOMContentLoaded", () => {
           searchType: searchType,
         }),
         signal: abortController.signal,
+      }).catch((error) => {
+        // O cancelamento continua sendo tratado no catch principal
+        if (error.name === "AbortError") throw error;
+        // Falha de rede: o navegador só informa "Failed to fetch" (ou similar)
+        throw new Error(
+          "Não foi possível conectar ao servidor. Verifique sua internet e tente novamente.",
+        );
       });
 
       if (!response.ok) {
