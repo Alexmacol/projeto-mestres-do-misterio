@@ -433,6 +433,7 @@ footer {
 .footer-links a:hover {
   opacity: 1;
   color: var(--color-text-light);
+  filter: drop-shadow(0 0 10px var(--color-accent-red));
 }
 
 /* Ajusta o tamanho do ícone */
