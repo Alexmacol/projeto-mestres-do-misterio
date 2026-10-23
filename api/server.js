@@ -16,7 +16,7 @@ if (!API_KEY) {
 }
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // Na Vercel há um proxy entre o visitante e a função. Com isso o Express
 // lê o IP real do visitante (X-Forwarded-For), e o rate limit conta por pessoa.
